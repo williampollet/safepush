@@ -58,5 +58,24 @@ module SafePusher
 
       invoke :prontorun
     end
+
+    desc 'pushandpr', 'push your code on github, and open a PR if it is the first time'
+    def pushandpr
+      puts '##########################'.yellow
+      puts "## Pushing to Github... ##".yellow
+      puts '##########################'.yellow
+
+      `git push origin`
+
+      if $?.exitstatus == 128
+        puts "Syncing with github...".green
+
+        `git push --set-upstream origin $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)`
+
+        if $?.exitstatus == 0
+          `open "https://github.com/KissKissBankBank/kisskissbankbank/pull/new/$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)"`
+        end
+      end
+    end
   end
 end

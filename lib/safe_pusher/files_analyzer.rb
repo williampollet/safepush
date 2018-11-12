@@ -1,3 +1,5 @@
+require 'colorize'
+
 module SafePusher
   class FilesAnalyzer
     def initialize(test_command:, create_specs: true, files_to_skip: [])
@@ -52,10 +54,19 @@ module SafePusher
     end
 
     def run_specs
-      return if specs_to_execute.empty?
+      if specs_to_execute.empty?
+        puts 'no spec analyzed, passing to the next step'.green
+        return true
+      end
 
       system("#{test_command} #{specs_to_execute.join(' ')}")
-      raise 'spec failed or skipped!' if $?.exitstatus != 0
+      if $?.exitstatus != 0
+        puts 'Oops, a spec seems to be red or empty, be sure to complete it before you push'.red
+        return false
+      else
+        puts "Every spec operational, passing to the next step!".green
+        return true
+      end
     end
 
     def create_new_spec(spec_path, f)

@@ -25,17 +25,13 @@ module SafePusher
 
     desc 'prontorun', 'launch pronto with a return message'
     def prontorun
-      if `$?` == 1
-        return 1
-      end
-
       puts '#######################'.yellow
       puts "## Running pronto... ##".yellow
       puts '#######################'.yellow
 
       `bundle exec pronto run --exit-code`
 
-      if `$?` != 0
+      if $?.exitstatus != 0
         puts "Pronto found somme errors... Fix them before pushing to master!".red
         return 1
       else
@@ -53,18 +49,13 @@ module SafePusher
         test_command: 'rspec spec',
         files_to_skip: FILES_TO_SKIP,
       ).call
-
-      if `$?` == 1
-        puts "Oops, a spec seems to be red or empty, be sure to complete it before you push".red
-        return 1
-      else
-        puts "Every spec operational, passing to the next step!".green
-      end
     end
 
     desc 'prontotest', 'launch the test suite, then pronto if it is successful'
     def prontotest
-      invoke :testorcreate
+      specs_results = invoke :testorcreate
+      return false unless specs_results
+
       invoke :prontorun
     end
   end

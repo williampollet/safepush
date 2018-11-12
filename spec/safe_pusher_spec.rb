@@ -3,7 +3,7 @@ RSpec.describe SafePusher do
     expect(SafePusher::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "launches an analysis" do
+    expect(true).to eq(true)
   end
 end

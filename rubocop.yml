@@ -1,0 +1,45 @@
+inherit_gem:
+  fashion_police:
+    - .rubocop.yml
+
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - db/schema.rb
+    - "**/*/node_modules/**/*"
+
+Rails:
+  Enabled: true
+
+# Deactivate rule that makes `lambda` mandatory in defavor of `->`
+# when having blocks.
+Style/Lambda:
+  Enabled: false
+
+# Allow `puts` method on seeds
+Rails/Output:
+  Exclude:
+    - db/seeds/**/*
+
+# Do not verify the length of the blocks in the specs.
+Metrics/BlockLength:
+  Exclude:
+    - app/admin/**/*
+    - engines/maker/spec/**/*
+    - engines/shopper/spec/**/*
+    - lib/tasks/**/*
+    - spec/**/*
+
+# Do not verify empty lines around blocks in specs
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - spec/**/*
+
+# Allow using normal test doubles, since they are useful for mocking.
+# See https://github.com/KissKissBankBank/fashion_police/pull/34
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+# Allow 5 nesting groups for context
+RSpec/NestedGroups:
+  Max: 5

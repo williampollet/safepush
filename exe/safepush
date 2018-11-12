@@ -1,4 +1,4 @@
-#! /usr/bin/sh
+#!/bin/sh
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -116,3 +116,13 @@ function test-or-create ()
     print "${GREEN}Every spec operational, passing to the next step!${NORMAL}"
   fi
 }
+
+case "$1" in
+  prontotest)
+    prontotest
+    ;;
+  *)
+    echo "undefined command $1"
+    exit 1
+    ;;
+esac

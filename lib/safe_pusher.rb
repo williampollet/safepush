@@ -33,9 +33,10 @@ module SafePusher
 
       if $?.exitstatus != 0
         puts "Pronto found somme errors... Fix them before pushing to master!".red
-        return 1
+        false
       else
         puts "No errors found by pronto, go for next step!".green
+        true
       end
     end
 
@@ -49,14 +50,6 @@ module SafePusher
         test_command: 'rspec spec',
         files_to_skip: FILES_TO_SKIP,
       ).call
-    end
-
-    desc 'prontotest', 'launch the test suite, then pronto if it is successful'
-    def prontotest
-      specs_results = invoke :testorcreate
-      return false unless specs_results
-
-      invoke :prontorun
     end
 
     desc 'pushandpr', 'push your code on github, and open a PR if it is the first time'
@@ -77,5 +70,32 @@ module SafePusher
         end
       end
     end
+
+    desc 'prontotest', 'launch the test suite, then pronto if it is successful'
+    def prontotest
+      specs_results = invoke :testorcreate
+      return false unless specs_results
+
+      invoke :prontorun
+    end
+
+    desc 'ppush', 'run your favorite linter, then push on github'
+    def ppush
+      linter_results = invoke :prontorun
+      return false unless linter_results
+
+      invoke :pushandpr
+    end
+  end
+
+  desc 'ppushtest' 'run your favorite linters and tests, then push on github'
+  def ppushtest
+    test_results = invoke :testorcreate
+    return false unless test_results
+
+    linter_results = invoke :prontorun
+    return false unless linter_results
+
+    invoke :pushandpr
   end
 end

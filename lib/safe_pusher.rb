@@ -86,16 +86,16 @@ module SafePusher
 
       invoke :pushandpr
     end
-  end
 
-  desc 'ppushtest', 'run your favorite linters and tests, then push on github'
-  def ppushtest
-    test_results = invoke :testorcreate
-    return false unless test_results
+    desc 'ppushtest', 'run your favorite linters and tests, then push on github'
+    def ppushtest
+      test_results = invoke :testorcreate
+      return false unless test_results
 
-    linter_results = invoke :prontorun
-    return false unless linter_results
+      linter_results = invoke :prontorun
+      return false unless linter_results
 
-    invoke :pushandpr
+      invoke :pushandpr
+    end
   end
 end

@@ -88,7 +88,7 @@ module SafePusher
     end
   end
 
-  desc 'ppushtest' 'run your favorite linters and tests, then push on github'
+  desc 'ppushtest', 'run your favorite linters and tests, then push on github'
   def ppushtest
     test_results = invoke :testorcreate
     return false unless test_results

@@ -1,5 +1,6 @@
 require 'safe_pusher/version'
 require 'safe_pusher/files_analyzer'
+require 'safe_pusher/configuration'
 require 'thor'
 require 'colorize'
 
@@ -29,7 +30,7 @@ module SafePusher
       puts "## Running pronto... ##".yellow
       puts '#######################'.yellow
 
-      `bundle exec pronto run --exit-code`
+      `bin/pronto run --exit-code`
 
       if $?.exitstatus != 0
         puts "Pronto found somme errors... Fix them before pushing to master!".red

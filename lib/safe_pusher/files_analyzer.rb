@@ -3,8 +3,9 @@ require 'colorize'
 module SafePusher
   class FilesAnalyzer
     def initialize(test_command:, create_specs: true, files_to_skip: [])
-      @modified_files = `git diff --name-status master | egrep -h "^M|^A" | cut -c 3-`.split("\n")
-      @moved_files = `git diff --name-status master | egrep -h "^R"`.split("\n")
+      @modified_files = `git whatchanged --name-only --pretty="" origin..HEAD`
+        .split("\n")
+        .uniq
       @test_command = test_command
       @specs_to_execute = []
       @create_specs = create_specs
@@ -13,25 +14,16 @@ module SafePusher
 
     def call
       list_files_to_execute
-      list_moved_files_to_execute
       run_specs
     end
 
     private
 
-    attr_reader :modified_files, :specs_to_execute, :test_command, :moved_files,
-                :create_specs
+    attr_reader :modified_files, :specs_to_execute, :test_command, :create_specs
 
     def list_files_to_execute
       modified_files.each do |f|
         analyze_file(f)
-      end
-    end
-
-    def list_moved_files_to_execute
-      moved_files.each do |f|
-        file = f.split("\t").last
-        analyze_file(file)
       end
     end
 

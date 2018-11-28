@@ -2,14 +2,14 @@ require 'colorize'
 
 module SafePusher
   class FilesAnalyzer
-    def initialize(test_command:, create_specs: true, files_to_skip: [])
+    def initialize(test_command:, create_specs: true, files_to_match: [])
       @modified_files = `git whatchanged --name-only --pretty="" origin..HEAD`
         .split("\n")
         .uniq
       @test_command = test_command
       @specs_to_execute = []
       @create_specs = create_specs
-      @files_to_skip = files_to_skip
+      @files_to_match = files_to_match
     end
 
     def call
@@ -28,7 +28,7 @@ module SafePusher
     end
 
     def analyze_file(f)
-      if f.match(/app\/.*\.rb$/) && !f.match(files_to_skip)
+      if f.match(/app\/.*\.rb$/) && f.match(files_to_match)
         puts "#{f} has been modified, searching for specs..."
 
         spec_path = f.gsub('app/', 'spec/').gsub('.rb', '_spec.rb')
@@ -39,7 +39,7 @@ module SafePusher
         else
           create_new_spec(spec_path, f)
         end
-      elsif !specs_to_execute.include?(f) && !f.match(files_to_skip)
+      elsif !specs_to_execute.include?(f) && f.match(files_to_match)
         puts "#{f} modified, putting it in the list of specs to run"
         specs_to_execute << f
       end
@@ -82,8 +82,8 @@ module SafePusher
       template = "require \'rails_helper\'\n\nRSpec.describe #{class_name} do\nend"
     end
 
-    def files_to_skip
-      Regexp.new(@files_to_skip.join('|').gsub('/', '\/'))
+    def files_to_match
+      Regexp.new(@files_to_match.join('|').gsub('/', '\/'))
     end
   end
 end

@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor"
   spec.add_dependency "colorize"
 
-
+  spec.add_development_dependency "pry"
   spec.add_development_dependency "pronto"
   spec.add_development_dependency "pronto-rubocop"
   spec.add_development_dependency "rubocop"

@@ -5,8 +5,8 @@ module SafePusher
                 :filters
 
   def initialize
-    @test_command = 'rspec spec'
-    @filters = []
+    @test_command = nil
+    @files_to_test = nil
   end
 
   # Configuration setup

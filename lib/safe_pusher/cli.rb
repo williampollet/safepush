@@ -6,7 +6,7 @@ module SafePusher
       puts "## Running pronto... ##".yellow
       puts '#######################'.yellow
 
-      exit SafePusher::ProntoRunnernew.new.call
+      exit SafePusher::ProntoRunner.new.call
     end
 
     desc 'testorcreate', 'launch the test suite with a return message'

@@ -2,7 +2,7 @@ require 'colorize'
 
 module SafePusher
   class GithubRunner
-    def self.call
+    def call
       push_on_github
 
       exit_status = $?.exitstatus

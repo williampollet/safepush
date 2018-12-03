@@ -2,7 +2,7 @@ require 'colorize'
 
 module SafePusher
   class ProntoRunner
-    def self.call
+    def call
       run_pronto
       exit_status = $?.exitstatus
 

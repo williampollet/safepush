@@ -6,7 +6,7 @@ module SafePusher
       puts "## Running pronto... ##".yellow
       puts '#######################'.yellow
 
-      exit SafePusher::ProntoRunner.call
+      exit SafePusher::ProntoRunnernew.new.call
     end
 
     desc 'testorcreate', 'launch the test suite with a return message'
@@ -15,7 +15,7 @@ module SafePusher
       puts "## Testing new files... ##".yellow
       puts '##########################'.yellow
 
-      exit SafePusher::RSpecRunner.call
+      exit SafePusher::RSpecRunner.new.call
     end
 
     desc 'pushandpr', 'push your code on github, and open a PR if it is the first time'
@@ -24,7 +24,7 @@ module SafePusher
       puts "## Pushing to Github... ##".yellow
       puts '##########################'.yellow
 
-      exit SafePusher::GithubRunner.call
+      exit SafePusher::GithubRunner.new.call
     end
 
     desc 'prontotest', 'launch the test suite, then pronto if it is successful'

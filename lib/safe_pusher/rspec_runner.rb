@@ -2,7 +2,7 @@ require 'colorize'
 
 module SafePusher
   class RSpecRunner
-    def self.call
+    def call
       run_specs(list_files_to_execute)
     end
 

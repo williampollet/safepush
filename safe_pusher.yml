@@ -1,0 +1,4 @@
+test_command: bin/rspec
+files_to_skip: [lib/safe_pusher.rb]
+app_base_directory: lib
+repo_url: 'https://github.com/williampollet/safe_pusher'

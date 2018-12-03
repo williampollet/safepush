@@ -2,23 +2,20 @@ require 'colorize'
 
 module SafePusher
   class RSpecRunner
-    def initialize
-      @specs_to_execute = []
-    end
-
-    def call
-      list_files_to_execute
-      run_specs
+    def self.call
+      run_specs(list_files_to_execute)
     end
 
     private
 
-    attr_reader :specs_to_execute
-
     def list_files_to_execute
-      modified_files.each do |f|
+      modified_files.map do |f|
         analyze_file(f)
-      end
+      end.compact
+    end
+
+    def modified_files
+      `git whatchanged --name-only --pretty="" origin..HEAD`.split("\n").uniq
     end
 
     def analyze_file(f)
@@ -29,17 +26,21 @@ module SafePusher
 
         if File.exists?(spec_path)
           puts "Spec found for #{f}, putting #{spec_path} in the list of specs to run"
-          specs_to_execute << spec_path
+          spec_path
         else
           create_new_spec(spec_path, f)
         end
       elsif !specs_to_execute.include?(f) && !f.match(files_to_skip)
         puts "#{f} modified, putting it in the list of specs to run"
-        specs_to_execute << f
+        f
       end
     end
 
-    def run_specs
+    def files_to_skip
+      Regexp.new(SafePusher.configuration.files_to_skip.join('|').gsub('/', '\/'))
+    end
+
+    def run_specs(specs_to_execute)
       if specs_to_execute.empty?
         puts 'no spec analyzed, passing to the next step'.green
         0
@@ -75,14 +76,6 @@ module SafePusher
     def template(spec_path)
       class_name = File.basename(spec_path).gsub('_spec.rb', '').split('_').map(&:capitalize).join
       template = "require \'rails_helper\'\n\nRSpec.describe #{class_name} do\nend"
-    end
-
-    def files_to_skip
-      Regexp.new(SafePusher.configuration.files_to_skip.join('|').gsub('/', '\/'))
-    end
-
-    def modified_files
-      `git whatchanged --name-only --pretty="" origin..HEAD`.split("\n").uniq
     end
   end
 end

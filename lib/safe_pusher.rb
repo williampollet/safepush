@@ -3,7 +3,9 @@ require 'thor'
 require 'colorize'
 require 'safe_pusher/cli'
 require 'safe_pusher/version'
-require 'safe_pusher/files_analyzer'
+require 'safe_pusher/rspec_runner'
+require 'safe_pusher/pronto_runner'
+require 'safe_pusher/github_runner'
 
 module SafePusher
   # Configuration setup

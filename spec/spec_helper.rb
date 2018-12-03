@@ -6,7 +6,8 @@ RSpec.configure do |config|
   config.before(:all) do
     SafePusher.configure do |config|
       config.test_command = 'bundle exec rspec'
-      config.files_to_test = %w[lib/]
+      config.app_base_directory = %w[lib/]
+      config.repo_url = 'https://github.com/williampollet/safe_pusher'
     end
   end
 

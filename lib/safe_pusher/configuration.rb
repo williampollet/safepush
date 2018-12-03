@@ -7,7 +7,8 @@ module SafePusher
 
     def initialize
       @test_command = nil
-      @files_to_test = nil
+      @files_to_skip = []
+      @app_base_directory = nil
       @repo_url = nil
     end
   end

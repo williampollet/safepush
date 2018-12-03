@@ -15,7 +15,7 @@ module SafePusher
       puts "## Testing new files... ##".yellow
       puts '##########################'.yellow
 
-      exit SafePusher::SpecsRunner.call
+      exit SafePusher::RSpecRunner.call
     end
 
     desc 'pushandpr', 'push your code on github, and open a PR if it is the first time'

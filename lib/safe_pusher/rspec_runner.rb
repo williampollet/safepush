@@ -1,15 +1,9 @@
 require 'colorize'
 
 module SafePusher
-  class SpecsRunner
-    def initialize(test_command:, create_specs: true, files_to_match: [])
-      @modified_files = `git whatchanged --name-only --pretty="" origin..HEAD`
-        .split("\n")
-        .uniq
-      @test_command = test_command
+  class RSpecRunner
+    def initialize
       @specs_to_execute = []
-      @create_specs = create_specs
-      @files_to_match = files_to_match
     end
 
     def call
@@ -19,7 +13,7 @@ module SafePusher
 
     private
 
-    attr_reader :modified_files, :specs_to_execute, :test_command, :create_specs
+    attr_reader :specs_to_execute
 
     def list_files_to_execute
       modified_files.each do |f|
@@ -28,10 +22,10 @@ module SafePusher
     end
 
     def analyze_file(f)
-      if f.match(/app\/.*\.rb$/) && f.match(files_to_match)
+      if f.match(/#{SafePusher.configuration.app_base_directory}\/.*\.rb$/) && !f.match(files_to_skip)
         puts "#{f} has been modified, searching for specs..."
 
-        spec_path = f.gsub('app/', 'spec/').gsub('.rb', '_spec.rb')
+        spec_path = f.gsub("#{SafePusher.configuration.app_base_directory}", 'spec/').gsub('.rb', '_spec.rb')
 
         if File.exists?(spec_path)
           puts "Spec found for #{f}, putting #{spec_path} in the list of specs to run"
@@ -39,7 +33,7 @@ module SafePusher
         else
           create_new_spec(spec_path, f)
         end
-      elsif !specs_to_execute.include?(f) && f.match(files_to_match)
+      elsif !specs_to_execute.include?(f) && !f.match(files_to_skip)
         puts "#{f} modified, putting it in the list of specs to run"
         specs_to_execute << f
       end
@@ -51,7 +45,7 @@ module SafePusher
         0
       end
 
-      system("#{test_command} #{specs_to_execute.join(' ')}")
+      system("#{SafePusher.configuration.test_command} #{specs_to_execute.join(' ')}")
 
       exit_status = $?.exitstatus
 
@@ -65,8 +59,6 @@ module SafePusher
     end
 
     def create_new_spec(spec_path, f)
-      return unless create_specs
-
       puts "no spec found for file #{f}, would you like to add #{spec_path}? (Yn)"
       result = gets.chomp
 
@@ -85,8 +77,12 @@ module SafePusher
       template = "require \'rails_helper\'\n\nRSpec.describe #{class_name} do\nend"
     end
 
-    def files_to_match
-      Regexp.new(@files_to_match.join('|').gsub('/', '\/'))
+    def files_to_skip
+      Regexp.new(SafePusher.configuration.files_to_skip.join('|').gsub('/', '\/'))
+    end
+
+    def modified_files
+      `git whatchanged --name-only --pretty="" origin..HEAD`.split("\n").uniq
     end
   end
 end

@@ -18,7 +18,7 @@ module SafePusher
     private
 
     def run_pronto
-      `bin/pronto run --exit-code`
+      puts `bin/pronto run --exit-code`
     end
   end
 end

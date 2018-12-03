@@ -11,6 +11,8 @@ module SafePusher
       else
         puts "No errors found by pronto, go for next step!"
       end
+
+      exit_status
     end
 
     private

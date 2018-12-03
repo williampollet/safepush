@@ -1,7 +1,7 @@
 require 'colorize'
 
 module SafePusher
-  class FilesAnalyzer
+  class SpecsRunner
     def initialize(test_command:, create_specs: true, files_to_match: [])
       @modified_files = `git whatchanged --name-only --pretty="" origin..HEAD`
         .split("\n")
@@ -48,17 +48,20 @@ module SafePusher
     def run_specs
       if specs_to_execute.empty?
         puts 'no spec analyzed, passing to the next step'.green
-        return true
+        0
       end
 
       system("#{test_command} #{specs_to_execute.join(' ')}")
-      if $?.exitstatus != 0
+
+      exit_status = $?.exitstatus
+
+      if exit_status != 0
         puts 'Oops, a spec seems to be red or empty, be sure to complete it before you push'.red
-        return false
       else
         puts "Every spec operational, passing to the next step!".green
-        return true
       end
+
+      exit_status
     end
 
     def create_new_spec(spec_path, f)

@@ -7,9 +7,9 @@ module SafePusher
       exit_status = $?.exitstatus
 
       if exit_status != 0
-        $stderr.puts 'Pronto found somme errors... Fix them before pushing to master!'
+        $stderr.puts 'Pronto found somme errors... Fix them before pushing to master!'.red
       else
-        puts "No errors found by pronto, go for next step!"
+        puts "No errors found by pronto, go for next step!".green
       end
 
       exit_status
@@ -18,7 +18,7 @@ module SafePusher
     private
 
     def run_pronto
-      puts `bin/pronto run --exit-code`
+      system('bin/pronto run --exit-code')
     end
   end
 end

@@ -7,7 +7,9 @@
 /pkg/
 /spec/reports/
 /tmp/
+bin/
+/*.gem
+/safe_pusher.yml
 
 # rspec failure tracking
 .rspec_status
-bin/

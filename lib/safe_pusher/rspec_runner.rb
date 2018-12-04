@@ -47,10 +47,10 @@ module SafePusher
       Regexp.new(SafePusher.configuration.files_to_skip.join('|').gsub('/', '\/'))
     end
 
-    def run_specs(specs_to_execute)
+    def run_specs
       if specs_to_execute.empty?
         puts 'no spec analyzed, passing to the next step'.green
-        0
+        return 0
       end
 
       system("bin/rspec #{specs_to_execute.join(' ')}")

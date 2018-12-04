@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'safe_pusher'
+require 'YAML'
 require 'pry'
 
 RSpec.configure do |config|

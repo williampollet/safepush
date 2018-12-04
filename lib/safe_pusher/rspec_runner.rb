@@ -94,9 +94,7 @@ module SafePusher
         puts 'Alright, skipping the test for now!'
         return 0
       else
-        File.open(spec_path, 'w') do |file|
-          file.write(template(spec_path))
-        end
+        File.open(spec_path, 'w') {}
         warn 'spec to write!'.red
         return 1
       end
@@ -108,16 +106,6 @@ module SafePusher
 
     def app_base_directory
       %r{#{SafePusher.configuration.app_base_directory}\/.*\.rb$}
-    end
-
-    def template(spec_path)
-      class_name =
-        File.basename(spec_path)
-          .gsub('_spec.rb', '')
-          .split('_')
-          .map(&:capitalize)
-          .join
-      "require \'rails_helper\'\n\nRSpec.describe #{class_name} do\nend"
     end
   end
 end

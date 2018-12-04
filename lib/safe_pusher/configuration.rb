@@ -2,8 +2,7 @@
 module SafePusher
   class Configuration
     # The configuration singleton
-    attr_accessor :test_command,
-                  :files_to_skip,
+    attr_accessor :files_to_skip,
                   :app_base_directory,
                   :repo_url
 

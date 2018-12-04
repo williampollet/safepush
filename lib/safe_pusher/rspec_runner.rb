@@ -1,11 +1,11 @@
 require 'colorize'
 
 module SafePusher
-  def initialize
-    @specs_to_execute = []
-  end
-
   class RSpecRunner
+    def initialize
+      @specs_to_execute = []
+    end
+
     def call
       list_files_to_execute
       run_specs

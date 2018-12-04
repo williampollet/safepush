@@ -1,4 +1,4 @@
-require 'YAML'
+require 'yaml'
 # Configuration variables and defaults
 module SafePusher
   class Configuration

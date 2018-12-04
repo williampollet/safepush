@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'YAML'
+require 'yaml'
 require 'safe_pusher'
 require 'pry'
 

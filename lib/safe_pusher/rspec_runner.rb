@@ -33,7 +33,9 @@ module SafePusher
       if file.match(app_base_directory) &&
          !file.match(files_to_skip)
         search_or_create_spec(file)
-      elsif !specs_to_execute.include?(file) && !file.match(files_to_skip)
+      elsif file.match(/spec/) &&
+            !specs_to_execute.include?(file) &&
+            !file.match(files_to_skip)
         index_file(file)
       end
     end

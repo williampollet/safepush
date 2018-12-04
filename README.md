@@ -18,15 +18,37 @@ Or install it yourself as:
 
     $ gem install safe_pusher
 
+
+To use the gem fully, you should install [pronto](https://github.com/prontolabs/pronto) and [rspec](https://github.com/rspec/rspec) first.
+
+## Configuration
+
+Generate the `binstubs` for `pronto` and `rspec`:
+
+    $ bundler binstubs pronto
+    $ bundler binstubs rspec-core
+
+create the `safe_pusher.yml` file at the root of your application
+
+```yaml
+files_to_skip: [file/to/skip_1, file/to/skip/2]
+app_base_directory: app
+repo_url: 'https://github.com/williampollet/safe_pusher'
+```
+
 ## Usage
 
-TODO
+To see the commands available, type:
 
-## Development
+    $ safepush
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+To run pronto checks before to push on github run:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    $ safepush ppush
+
+To run specs and pronto before to push on github run:
+
+    $ safepush ppushtest
 
 ## Contributing
 

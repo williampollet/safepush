@@ -24,7 +24,7 @@ module SafePusher
     end
 
     def modified_files
-      branch = `git rev-parse --abbrev-ref HEAD`.gsub("\n", '')
+      branch = `git rev-parse --abbrev-ref HEAD`.delete("\n")
       `git diff --name-only #{branch} $(git merge-base #{branch} master)`
         .split("\n")
         .uniq

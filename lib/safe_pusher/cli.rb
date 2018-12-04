@@ -17,7 +17,7 @@ module SafePusher
       puts '## Testing new files... ##'.yellow
       puts '##########################'.yellow
 
-      results = SafePusher::RSpecRunner.new.call
+      results = SafePusher::RspecRunner.new.call
 
       exit results unless results == 0
     end

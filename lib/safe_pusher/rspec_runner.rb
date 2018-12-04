@@ -2,7 +2,7 @@ require 'colorize'
 require 'English'
 
 module SafePusher
-  class RSpecRunner
+  class RspecRunner
     def initialize
       @specs_to_execute = []
     end

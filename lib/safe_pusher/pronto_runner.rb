@@ -1,4 +1,5 @@
 require 'colorize'
+require 'English'
 
 module SafePusher
   class ProntoRunner

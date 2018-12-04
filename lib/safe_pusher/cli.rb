@@ -9,8 +9,8 @@ module SafePusher
       exit SafePusher::ProntoRunner.new.call
     end
 
-    desc 'testorcreate', 'launch the test suite with a return message'
-    def testorcreate
+    desc 'test', 'launch the test suite with a return message'
+    def test
       puts '##########################'.yellow
       puts "## Testing new files... ##".yellow
       puts '##########################'.yellow
@@ -29,7 +29,7 @@ module SafePusher
 
     desc 'prontotest', 'launch the test suite, then pronto if it is successful'
     def prontotest
-      invoke :testorcreate
+      invoke :test
       invoke :prontorun
     end
 
@@ -41,7 +41,7 @@ module SafePusher
 
     desc 'ppushtest', 'run your favorite linters and tests, then push on github'
     def ppushtest
-      invoke :testorcreate
+      invoke :test
       invoke :prontorun
       invoke :pushandpr
     end

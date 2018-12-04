@@ -1,12 +1,19 @@
 require 'colorize'
 
 module SafePusher
+  def initialize
+    @specs_to_execute = []
+  end
+
   class RSpecRunner
     def call
-      run_specs(list_files_to_execute)
+      list_files_to_execute
+      run_specs
     end
 
     private
+
+    attr_reader :specs_to_execute
 
     def list_files_to_execute
       modified_files.map do |f|
@@ -26,13 +33,13 @@ module SafePusher
 
         if File.exists?(spec_path)
           puts "Spec found for #{f}, putting #{spec_path} in the list of specs to run"
-          spec_path
+          specs_to_execute << spec_path
         else
           create_new_spec(spec_path, f)
         end
       elsif !specs_to_execute.include?(f) && !f.match(files_to_skip)
         puts "#{f} modified, putting it in the list of specs to run"
-        f
+        specs_to_execute << f
       end
     end
 

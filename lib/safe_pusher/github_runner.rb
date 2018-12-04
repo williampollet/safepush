@@ -33,8 +33,7 @@ module SafePusher
 
     def open_pull_request_url
       system(
-        "open '#{SafePusher.configuration.repo_url}/pull/new"\
-        "/#{branch})'",
+        "open '#{SafePusher.configuration.repo_url}/pull/new/#{branch}'",
       )
     end
 

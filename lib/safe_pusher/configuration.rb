@@ -1,3 +1,4 @@
+require 'YAML'
 # Configuration variables and defaults
 module SafePusher
   class Configuration
@@ -7,9 +8,11 @@ module SafePusher
                   :repo_url
 
     def initialize
-      @files_to_skip = []
-      @app_base_directory = nil
-      @repo_url = nil
+      application_config = YAML.load('safe_pusher.yml')
+
+      @files_to_skip = application_config['files_to_skip'] || []
+      @app_base_directory = application_config['app_base_directory']
+      @repo_url = application_config['repo_url']
     end
   end
 end

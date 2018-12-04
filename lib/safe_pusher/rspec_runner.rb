@@ -7,7 +7,7 @@ module SafePusher
     end
 
     def call
-      list_files_to_execute
+      return 1 if list_files_to_execute == 1
       run_specs
     end
 
@@ -17,7 +17,7 @@ module SafePusher
 
     def list_files_to_execute
       modified_files.map do |f|
-        analyze_file(f)
+        return 1 if analyze_file(f) == 1
       end.compact
     end
 
@@ -35,7 +35,7 @@ module SafePusher
           puts "Spec found for #{f}, putting #{spec_path} in the list of specs to run"
           specs_to_execute << spec_path
         else
-          create_new_spec(spec_path, f)
+          return create_new_spec(spec_path, f)
         end
       elsif !specs_to_execute.include?(f) && !f.match(files_to_skip)
         puts "#{f} modified, putting it in the list of specs to run"
@@ -68,15 +68,17 @@ module SafePusher
 
     def create_new_spec(spec_path, f)
       puts "no spec found for file #{f}, would you like to add #{spec_path}? (Yn)"
-      result = gets.chomp
+      result = STDIN.gets.chomp
 
       if result.downcase == 'n'
         puts 'Alright, skipping the test for now!'
+        return 0
       else
         f = File.open(spec_path, 'w') do |file|
           file.write(template(spec_path))
         end
-        raise 'spec to write!'
+        $stderr.puts 'spec to write!'
+        return 1
       end
     end
 

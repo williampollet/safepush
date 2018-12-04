@@ -33,9 +33,11 @@ Generate the `binstubs` for `pronto` and `rspec`:
 create the `safe_pusher.yml` file at the root of your application
 
 ```yaml
-files_to_skip: [file/to/skip_1, file/to/skip/2]
+files_to_skip:
+  - file/to/skip_1
+  - file/to/skip/2
 app_base_directory: app
-repo_url: 'https://github.com/williampollet/safe_pusher'
+repo_url: https://github.com/williampollet/safe_pusher
 ```
 
 ## Usage

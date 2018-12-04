@@ -8,7 +8,6 @@ module SafePusher
                   :repo_url
 
     def initialize
-      @test_command = nil
       @files_to_skip = []
       @app_base_directory = nil
       @repo_url = nil

@@ -46,7 +46,7 @@ module SafePusher
         0
       end
 
-      system("#{SafePusher.configuration.test_command} #{specs_to_execute.join(' ')}")
+      system("bin/rspec #{specs_to_execute.join(' ')}")
 
       exit_status = $?.exitstatus
 

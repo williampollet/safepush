@@ -3,7 +3,7 @@ module SafePusher
     desc 'prontorun', 'launch pronto with a return message'
     def prontorun
       puts '#######################'.yellow
-      puts "## Running pronto... ##".yellow
+      puts '## Running pronto... ##'.yellow
       puts '#######################'.yellow
 
       results = SafePusher::ProntoRunner.new.call
@@ -14,7 +14,7 @@ module SafePusher
     desc 'test', 'launch the test suite with a return message'
     def test
       puts '##########################'.yellow
-      puts "## Testing new files... ##".yellow
+      puts '## Testing new files... ##'.yellow
       puts '##########################'.yellow
 
       results = SafePusher::RSpecRunner.new.call
@@ -22,10 +22,11 @@ module SafePusher
       exit results unless results == 0
     end
 
-    desc 'pushandpr', 'push your code on github, and open a PR if it is the first time'
+    desc 'pushandpr', 'push your code on github,'\
+         ' and open a PR if it is the first time'
     def pushandpr
       puts '##########################'.yellow
-      puts "## Pushing to Github... ##".yellow
+      puts '## Pushing to Github... ##'.yellow
       puts '##########################'.yellow
 
       results = SafePusher::GithubRunner.new.call

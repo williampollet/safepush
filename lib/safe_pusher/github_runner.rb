@@ -25,15 +25,15 @@ module SafePusher
     private
 
     def push_on_github
-      `git push origin`
+      system('git push origin')
     end
 
     def push_and_set_upstream
-      `git push --set-upstream origin $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)`
+      system('git push --set-upstream origin $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)')
     end
 
     def open_pull_request_url
-      `open "#{SafePusher.configuration.repo_url}/pull/new/$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)"`
+      system("open '#{SafePusher.configuration.repo_url}/pull/new/$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)'")
     end
   end
 end

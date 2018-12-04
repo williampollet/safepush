@@ -17,7 +17,7 @@ module SafePusher
       puts "## Testing new files... ##".yellow
       puts '##########################'.yellow
 
-      results == SafePusher::RSpecRunner.new.call
+      results = SafePusher::RSpecRunner.new.call
 
       exit results unless results == 0
     end
@@ -28,7 +28,7 @@ module SafePusher
       puts "## Pushing to Github... ##".yellow
       puts '##########################'.yellow
 
-      results == SafePusher::GithubRunner.new.call
+      results = SafePusher::GithubRunner.new.call
 
       exit results unless results == 0
     end

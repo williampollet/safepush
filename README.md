@@ -1,5 +1,4 @@
 # SafePusher
----
 
 [![Build Status](https://travis-ci.com/williampollet/safe_pusher.svg?branch=master)](https://travis-ci.com/williampollet/safe_pusher)
 

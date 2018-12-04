@@ -1,11 +1,9 @@
 ---
 sudo: false
-cache: bundler
 language: ruby
+cache: bundler
 rvm:
 - 2.3.7
-- 1.9.3
-- jruby-19mode
-- rbx-2
 
+before_install: gem install bundler -v 1.16.3
 script: bin/rspec

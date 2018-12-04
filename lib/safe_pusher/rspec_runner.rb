@@ -24,7 +24,6 @@ module SafePusher
     end
 
     def modified_files
-      branch = `git rev-parse --abbrev-ref HEAD`.delete("\n")
       `git diff --name-only #{branch} $(git merge-base #{branch} master)`
         .split("\n")
         .uniq
@@ -101,6 +100,10 @@ module SafePusher
         warn 'spec to write!'.red
         return 1
       end
+    end
+
+    def branch
+      `git rev-parse --abbrev-ref HEAD`.delete("\n")
     end
 
     def app_base_directory

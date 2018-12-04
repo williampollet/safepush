@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-RSpec.describe SafePusher::Cli do
+RSpec.describe SafePusher::CLI do
 end

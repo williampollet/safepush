@@ -6,7 +6,9 @@ module SafePusher
       puts "## Running pronto... ##".yellow
       puts '#######################'.yellow
 
-      exit SafePusher::ProntoRunner.new.call
+      results = SafePusher::ProntoRunner.new.call
+
+      exit results unless results == 0
     end
 
     desc 'test', 'launch the test suite with a return message'
@@ -15,7 +17,9 @@ module SafePusher
       puts "## Testing new files... ##".yellow
       puts '##########################'.yellow
 
-      exit SafePusher::RSpecRunner.new.call
+      results == SafePusher::RSpecRunner.new.call
+
+      exit results unless results == 0
     end
 
     desc 'pushandpr', 'push your code on github, and open a PR if it is the first time'
@@ -24,11 +28,13 @@ module SafePusher
       puts "## Pushing to Github... ##".yellow
       puts '##########################'.yellow
 
-      exit SafePusher::GithubRunner.new.call
+      results == SafePusher::GithubRunner.new.call
+
+      exit results unless results == 0
     end
 
-    desc 'prontotest', 'launch the test suite, then pronto if it is successful'
-    def prontotest
+    desc 'ptest', 'launch the test suite, then pronto if it is successful'
+    def ptest
       invoke :test
       invoke :prontorun
     end

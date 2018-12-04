@@ -28,17 +28,18 @@ module SafePusher
     end
 
     def push_and_set_upstream
-      system(
-        'git push --set-upstream origin'\
-        ' $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)',
-      )
+      system("git push --set-upstream origin #{branch}")
     end
 
     def open_pull_request_url
       system(
         "open '#{SafePusher.configuration.repo_url}/pull/new"\
-        "/$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)'",
+        "/#{branch})'",
       )
+    end
+
+    def branch
+      `git rev-parse --symbolic-full-name --abbrev-ref HEAD`.delete("\n")
     end
   end
 end

@@ -26,27 +26,33 @@ module SafePusher
       `git whatchanged --name-only --pretty="" origin..HEAD`.split("\n").uniq
     end
 
-    def analyze_file(f)
-      if f.match(%r{#{SafePusher.configuration.app_base_directory}\/.*\.rb$}) &&
-         !f.match(files_to_skip)
-        puts "#{f} has been modified, searching for specs..."
-
-        spec_path = f.gsub(
-          SafePusher.configuration.app_base_directory,
-          'spec/',
-        ).gsub('.rb', '_spec.rb')
-
-        if File.exist?(spec_path)
-          puts "Spec found for #{f}, putting #{spec_path}"\
-               ' in the list of specs to run'
-          specs_to_execute << spec_path
-        else
-          return create_new_spec(spec_path, f)
-        end
-      elsif !specs_to_execute.include?(f) && !f.match(files_to_skip)
-        puts "#{f} modified, putting it in the list of specs to run"
-        specs_to_execute << f
+    def analyze_file(file)
+      if file.match(app_base_directory) &&
+         !file.match(files_to_skip)
+        search_or_create_spec(file)
+      elsif !specs_to_execute.include?(file) && !file.match(files_to_skip)
+        index_file(file)
       end
+    end
+
+    def search_or_create_spec
+      puts "#{f} has been modified, searching for specs..."
+
+      spec_path = f.gsub(
+        SafePusher.configuration.app_base_directory,
+        'spec/',
+      ).gsub('.rb', '_spec.rb')
+
+      return create_new_spec(spec_path, f) unless File.exist?(spec_path)
+
+      puts "Spec found for #{f}, putting #{spec_path}"\
+           ' in the list of specs to run'
+      specs_to_execute << spec_path
+    end
+
+    def index_file(file)
+      puts "#{file} modified, putting it in the list of specs to run"
+      specs_to_execute << file
     end
 
     def files_to_skip
@@ -91,6 +97,10 @@ module SafePusher
         warn 'spec to write!'.red
         return 1
       end
+    end
+
+    def app_base_directory
+      %r{#{SafePusher.configuration.app_base_directory}\/.*\.rb$}
     end
 
     def template(spec_path)

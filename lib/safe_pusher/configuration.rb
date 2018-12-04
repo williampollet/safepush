@@ -9,7 +9,7 @@ module SafePusher
 
     def initialize
       application_config = YAML.load_file(
-        File.join(__dir__, './safe_pusher.yml'),
+        File.join(__dir__, 'safe_pusher.yml'),
       )
 
       @files_to_skip = application_config['files_to_skip'] || []

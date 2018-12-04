@@ -42,7 +42,7 @@ module SafePusher
       puts "#{file} has been modified, searching for specs..."
 
       spec_path = file.gsub(
-        SafePusher.configuration.app_base_directory,
+        "#{SafePusher.configuration.app_base_directory}/",
         'spec/',
       ).gsub('.rb', '_spec.rb')
 

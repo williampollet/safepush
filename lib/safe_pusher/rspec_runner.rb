@@ -24,7 +24,10 @@ module SafePusher
     end
 
     def modified_files
-      `git whatchanged --name-only --pretty="" origin..HEAD`.split("\n").uniq
+      branch = `git branch | grep \* | cut -d ' ' -f2`
+      `git diff --name-only #{branch} $(git merge-base #{branch} master)`
+        .split("\n")
+        .uniq
     end
 
     def analyze_file(file)

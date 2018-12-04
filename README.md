@@ -1,4 +1,7 @@
 # SafePusher
+---
+
+[![Build Status](https://travis-ci.com/williampollet/safe_pusher.svg?branch=master)](https://travis-ci.com/williampollet/safe_pusher)
 
 Run your favorite linters and specs on the files you touched, before pushing your branch
 

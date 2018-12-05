@@ -40,11 +40,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'thor', '~> 0.19.4'
 
   spec.add_development_dependency 'bundler', '~> 1.16'
-  spec.add_development_dependency 'fashion_police', '~> 1.2.2'
-  spec.add_development_dependency 'pronto', '~> 0.9.5'
-  spec.add_development_dependency 'pronto-rubocop', '~> 0.9.0'
-  spec.add_development_dependency 'pry', '~> 0.12.2'
+  spec.add_development_dependency 'fashion_police', '~> 1.2'
+  spec.add_development_dependency 'pronto', '~> 0.9'
+  spec.add_development_dependency 'pronto-rubocop', '~> 0.9'
+  spec.add_development_dependency 'pry', '~> 0.12'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 0.60.0'
+  spec.add_development_dependency 'rubocop', '~> 0.60'
 end

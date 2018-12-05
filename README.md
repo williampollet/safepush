@@ -1,5 +1,7 @@
 # SafePusher
 
+[![Build Status](https://travis-ci.com/williampollet/safe_pusher.svg?branch=master)](https://travis-ci.com/williampollet/safe_pusher)
+
 Run your favorite linters and specs on the files you touched, before pushing your branch
 
 ## Installation
@@ -31,9 +33,11 @@ Generate the `binstubs` for `pronto` and `rspec`:
 create the `safe_pusher.yml` file at the root of your application
 
 ```yaml
-files_to_skip: [file/to/skip_1, file/to/skip/2]
+files_to_skip:
+  - file/to/skip_1
+  - file/to/skip/2
 app_base_directory: app
-repo_url: 'https://github.com/williampollet/safe_pusher'
+repo_url: https://github.com/williampollet/safe_pusher
 ```
 
 ## Usage

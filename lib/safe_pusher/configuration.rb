@@ -11,7 +11,7 @@ module SafePusher
       if File.exist?('safe_pusher.yml')
         application_config = YAML.load_file('safe_pusher.yml')
       else
-        {}
+        application_config = {}
       end
 
       @files_to_skip = application_config['files_to_skip'] || []

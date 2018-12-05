@@ -8,11 +8,12 @@ module SafePusher
                   :repo_url
 
     def initialize
-      if File.exist?('safe_pusher.yml')
-        application_config = YAML.load_file('safe_pusher.yml')
-      else
-        application_config = {}
-      end
+      application_config =
+        if File.exist?('safe_pusher.yml')
+          YAML.load_file('safe_pusher.yml')
+        else
+          {}
+        end
 
       @files_to_skip = application_config['files_to_skip'] || []
       @app_base_directory = application_config['app_base_directory']

@@ -36,15 +36,15 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'colorize'
-  spec.add_dependency 'thor'
+  spec.add_dependency 'colorize', '~> 0.8.1'
+  spec.add_dependency 'thor', '~> 0.19.4'
 
   spec.add_development_dependency 'bundler', '~> 1.16'
-  spec.add_development_dependency 'fashion_police'
-  spec.add_development_dependency 'pronto'
-  spec.add_development_dependency 'pronto-rubocop'
-  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'fashion_police', '~> 1.2.2'
+  spec.add_development_dependency 'pronto', '~> 0.9.5'
+  spec.add_development_dependency 'pronto-rubocop', '~> 0.9.0'
+  spec.add_development_dependency 'pry', '~> 0.12.2'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop', '~> 0.60.0'
 end

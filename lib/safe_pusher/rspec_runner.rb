@@ -24,7 +24,9 @@ module SafePusher
     end
 
     def modified_files
-      `git diff --name-only #{branch} $(git merge-base #{branch} master)`
+      diff = 'git diff --diff-filter=A --diff-filter=M --name-only'
+
+      `#{diff} $(git merge-base #{branch} master) #{branch}`
         .split("\n")
         .uniq
     end

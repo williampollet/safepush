@@ -25,3 +25,7 @@ RSpec/NestedGroups:
 Metrics/BlockLength:
   Exclude:
     - safe_pusher.gemspec
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*

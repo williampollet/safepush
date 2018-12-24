@@ -7,6 +7,7 @@ RSpec.configure do |config|
   config.before(:all) do
     SafePusher.configure do |safe_pusher_config|
       safe_pusher_config.app_base_directory = %w[lib/]
+      safe_pusher_config.files_to_skip = %w[spec/spec_helper]
       safe_pusher_config.repo_url =
         'https://github.com/williampollet/safe_pusher'
     end

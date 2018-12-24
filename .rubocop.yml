@@ -1,6 +1,141 @@
-inherit_gem:
-  fashion_police:
-    - .rubocop.yml
+require: rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.3
+  DisplayCopNames: true
+
+# Do not sort gems in Gemfile, since we are grouping them by functionality.
+Bundler/OrderedGems:
+  Enabled: false
+
+# Add a comment before each gem in Gemfile.
+Bundler/GemComment:
+  Enabled: true
+
+# Trailing commas are required on multiline method arguments.
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+# Trailing commas are required in multiline arrays.
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+# Trailing commas are required in multiline hashes.
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+# Allow indenting multiline chained operations.
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# Allow empty lines around blocks in specs.
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - spec/**/*
+
+# Allow not adding parentheses around blocks in DSLs.
+# E.g.:
+#     expect { … }.to change { … }
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+
+# Limit method length (default is 10).
+Metrics/MethodLength:
+  Max: 15
+
+# Limit class length (default is 100).
+Metrics/ClassLength:
+  Max: 200
+
+# Do not require `# frozen_string_literal: true` at the top of every file.
+FrozenStringLiteralComment:
+  Enabled: false
+
+# Allow ASCII comments (e.g "…").
+Style/AsciiComments:
+  Enabled: false
+
+# Do not comment the class we create, since the name should be self explanatory.
+Documentation:
+  Enabled: false
+
+# Do not verify the length of the blocks in DSLs.
+Metrics/BlockLength:
+  Exclude:
+    - "**/*/spec/**/*"
+    - lib/tasks/**/*
+    - app/admin/**/*
+    - config/routes.rb
+  ExcludedMethods:
+    - included
+
+# Allow any number of keyword arguments in methods.
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+# Prefer `a_variable_1` to `a_variable1`.
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+# Prefer `== 0`, `< 0`, `> 0` to `zero?`, `negative?` or `positive?`,
+# since they don't exist before Ruby 2.3 or Rails 5 and can be ambiguous.
+Style/NumericPredicate:
+  EnforcedStyle: comparison
+
+# This cop by default assumes that `Rails.root.join('foo', 'bar')` works
+# better under Windows than `Rails.root.join('foo/bar')`.
+Rails/FilePath:
+  EnforcedStyle: slashes
+
+# Do not checks for the use of output safety calls like `html_safe` and `raw`,
+# we know what we are doing.
+Rails/OutputSafety:
+  Enabled: false
+
+# Allow `update_attribute`, we know when to use it.
+Rails/SkipsModelValidations:
+  Enabled: false
+
+# Allow creating tables without timestamps, whe know what we are doing.
+Rails/CreateTableWithTimestamps:
+  Enabled: false
+
+# Allow using `allow_any_instance_of` for stubbing.
+RSpec/AnyInstance:
+  Enabled: false
+
+# Allow `let!` to setup test data in specs.
+RSpec/LetSetup:
+  Enabled: false
+
+# Allow a nesting of up to 5 of describe/context blocks (default is 3).
+RSpec/NestedGroups:
+  Max: 5
+
+# Allow any number of expectations in an example, for performance.
+RSpec/MultipleExpectations:
+  Enabled: false
+
+# Allow using normal test doubles, since they are useful for mocking.
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+# Limit example length (default is 5)
+RSpec/ExampleLength:
+  Max: 10
+
+# Prefer `change { User.count }` to `change(User, :count)`.
+RSpec/ExpectChange:
+  EnforcedStyle: block
+
+# Allow template token "%{foo}" since they are used in translation keys.
+Style/FormatStringToken:
+  EnforcedStyle: template
+
+# Prefer `->` to `lambda`.
+Style/Lambda:
+  EnforcedStyle: literal
 
 # Deactivate rule that makes `lambda` mandatory in defavor of `->`
 # when having blocks.

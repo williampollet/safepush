@@ -13,7 +13,7 @@ module SafePusher
     attr_writer :configuration
 
     def configuration
-      @configuration = Configuration.new
+      @configuration ||= Configuration.new
     end
 
     def configure

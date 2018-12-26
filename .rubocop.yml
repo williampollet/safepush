@@ -111,7 +111,7 @@ RSpec/LetSetup:
 
 # Allow a nesting of up to 5 of describe/context blocks (default is 3).
 RSpec/NestedGroups:
-  Max: 5
+  Max: 10
 
 # Allow any number of expectations in an example, for performance.
 RSpec/MultipleExpectations:
@@ -151,10 +151,6 @@ Layout/EmptyLinesAroundBlockBody:
 # See https://github.com/KissKissBankBank/fashion_police/pull/34
 RSpec/VerifiedDoubles:
   Enabled: false
-
-# Allow 5 nesting groups for context
-RSpec/NestedGroups:
-  Max: 5
 
 # Enable long blocs for Gemspec files
 Metrics/BlockLength:

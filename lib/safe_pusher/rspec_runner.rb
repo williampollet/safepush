@@ -99,7 +99,7 @@ module SafePusher
         return 0
       else
         File.open(spec_path, 'w') {}
-        warn 'spec to write!'.red
+        warn 'A spec needs to be written!'.red
         return 1
       end
     end

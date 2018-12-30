@@ -3,8 +3,8 @@ require 'English'
 
 module SafePusher
   class GithubRunner
-    def call
-      push_on_github
+    def push_and_open
+      push
 
       exit_status = $CHILD_STATUS.exitstatus
 
@@ -15,26 +15,26 @@ module SafePusher
 
         exit_status = $CHILD_STATUS.exitstatus
 
-        open_pull_request_url if exit_status == 0
+        open if exit_status == 0
       end
 
       exit_status
     end
 
-    private
-
-    def push_on_github
+    def push
       system('git push origin')
     end
 
-    def push_and_set_upstream
-      system("git push --set-upstream origin #{branch}")
-    end
-
-    def open_pull_request_url
+    def open
       system(
         "open '#{SafePusher.configuration.repo_url}/pull/new/#{branch}'",
       )
+    end
+
+    private
+
+    def push_and_set_upstream
+      system("git push --set-upstream origin #{branch}")
     end
 
     def branch

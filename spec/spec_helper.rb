@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'bundler/setup'
 require 'yaml'
 require 'safe_pusher'

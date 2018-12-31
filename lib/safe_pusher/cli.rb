@@ -70,7 +70,7 @@ module SafePusher
     map 'tl' => :test_and_lint
 
     desc 'lint_push_and_open (lpo)',
-         'run your favorite linter, then push on github and open a'\
+         'lanch the linters, then push on github and open a'\
          ' Pull Request on Github if none is openned'
     def lint_push_and_open
       invoke :lint
@@ -79,7 +79,7 @@ module SafePusher
     map 'lpo' => :lint_push_and_open
 
     desc 'test_lint_push_and_open (tlpo)',
-         'run your favorite linters and tests, then push on github and open'\
+         'lanch the linters, launch test suite, then push on github and open'\
          'a Pull Request if none is openned'
     def test_lint_push_and_open
       invoke :test

@@ -4,7 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org)
 
 ## [0.2.1] - 2018-12-31
 Improvement:
- - Deprecating rainbow to install pronto and pronto rubocop
+ - Deprecating rainbow to install pronto and pronto Rubocop
+
+Notes:
+This version of SafePusher use rainbow 2.2, that can be incompatible with
+the latest version of React On Rails (for instance).
+Previous versions of the gem use rainbow 3.0.
 
 ## [0.2.0] - 2018-12-31
 Feature:

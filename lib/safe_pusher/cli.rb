@@ -1,17 +1,6 @@
 module SafePusher
   class CLI < Thor
-    desc 'prontorun', 'launch pronto with a return message'
-    def prontorun
-      puts '#######################'.yellow
-      puts '## Running pronto... ##'.yellow
-      puts '#######################'.yellow
-
-      results = SafePusher::ProntoRunner.new.call
-
-      exit results unless results == 0
-    end
-
-    desc 'test', 'launch the test suite with a return message'
+    desc 'test (t)', 'launch the test suite'
     def test
       puts '##########################'.yellow
       puts '## Testing new files... ##'.yellow
@@ -21,36 +10,82 @@ module SafePusher
 
       exit results unless results == 0
     end
+    map 't' => :test
 
-    desc 'pushandpr', 'push your code on github,'\
-         ' and open a PR if it is the first time'
-    def pushandpr
+    desc 'lint (l)', 'launch the linters'
+    def lint
+      puts '#######################'.yellow
+      puts '## Running linter... ##'.yellow
+      puts '#######################'.yellow
+
+      results = SafePusher::ProntoRunner.new.call
+
+      exit results unless results == 0
+    end
+    map 'l' => :lint
+
+    desc 'push (p)', 'push your code on github'
+    def push
       puts '##########################'.yellow
       puts '## Pushing to Github... ##'.yellow
       puts '##########################'.yellow
 
-      results = SafePusher::GithubRunner.new.call
+      results = SafePusher::GithubRunner.new.push
 
       exit results unless results == 0
     end
+    map 'p' => :push
 
-    desc 'ptest', 'launch the test suite, then pronto if it is successful'
-    def ptest
+    desc 'open (o)', 'open a pull request on github'
+    def open
+      puts '#########################################'.yellow
+      puts '## Opening a pull request on Github... ##'.yellow
+      puts '#########################################'.yellow
+
+      results = SafePusher::GithubRunner.new.open
+
+      exit results unless results == 0
+    end
+    map 'o' => :open
+
+    desc 'push_and_open (po)', 'push your code on github,'\
+         ' and open a Pull Request on Github if none is openned'
+    def push_and_open
+      puts '##########################'.yellow
+      puts '## Pushing to Github... ##'.yellow
+      puts '##########################'.yellow
+
+      results = SafePusher::GithubRunner.new.push_and_open
+
+      exit results unless results == 0
+    end
+    map 'po' => :push_and_open
+
+    desc 'test_and_lint (tl)',
+         'launch the test suite, then the linters if it is successful'
+    def test_and_lint
       invoke :test
-      invoke :prontorun
+      invoke :lint
     end
+    map 'tl' => :test_and_lint
 
-    desc 'ppush', 'run your favorite linter, then push on github'
-    def ppush
-      invoke :prontorun
-      invoke :pushandpr
+    desc 'lint_push_and_open (lpo)',
+         'lanch the linters, then push on github and open a'\
+         ' Pull Request on Github if none is openned'
+    def lint_push_and_open
+      invoke :lint
+      invoke :push_and_open
     end
+    map 'lpo' => :lint_push_and_open
 
-    desc 'ppushtest', 'run your favorite linters and tests, then push on github'
-    def ppushtest
+    desc 'test_lint_push_and_open (tlpo)',
+         'lanch the linters, launch test suite, then push on github and open'\
+         'a Pull Request if none is openned'
+    def test_lint_push_and_open
       invoke :test
-      invoke :prontorun
-      invoke :pushandpr
+      invoke :lint
+      invoke :push_and_open
     end
+    map 'tlpo' => :test_lint_push_and_open
   end
 end

@@ -51,6 +51,25 @@ RSpec.describe SafePusher::RspecRunner do
       allow($stdout).to receive(:puts)
     end
 
+    context 'when the files are in the spec directory' do
+      before do
+        allow(rspec_runner).to receive(:system)
+        allow(rspec_runner).to(
+          receive(:`).with(
+            a_string_including('git diff'),
+          ).and_return('spec/safe_pusher/github_runner.rb'),
+        )
+      end
+
+      it 'runs the spec' do
+        run_specs
+
+        expect(rspec_runner).to(
+          have_received(:system).with(a_string_including('bin/rspec')),
+        )
+      end
+    end
+
     context 'when the files are in the app base directory' do
       describe 'when the files are filtered by the files_to_skip list' do
         before do

@@ -1,6 +1,6 @@
 module SafePusher
   class CLI < Thor
-    desc 'test', 'launch the test suite with a return message'
+    desc 'test (t)', 'launch the test suite with a return message'
     def test
       puts '##########################'.yellow
       puts '## Testing new files... ##'.yellow
@@ -12,7 +12,7 @@ module SafePusher
     end
     map t: :test
 
-    desc 'lint', 'launch pronto with a return message'
+    desc 'lint (l)', 'launch pronto with a return message'
     def lint
       puts '#######################'.yellow
       puts '## Running pronto... ##'.yellow
@@ -24,7 +24,7 @@ module SafePusher
     end
     map l: :lint
 
-    desc 'push', 'push your code on github'
+    desc 'push (p)', 'push your code on github'
     def push
       puts '##########################'.yellow
       puts '## Pushing to Github... ##'.yellow
@@ -36,7 +36,7 @@ module SafePusher
     end
     map p: :push
 
-    desc 'open', 'open a pull request on github'
+    desc 'open (o)', 'open a pull request on github'
     def open
       puts '#########################################'.yellow
       puts '## Opening a pull request on Github... ##'.yellow
@@ -48,8 +48,8 @@ module SafePusher
     end
     map o: :open
 
-    desc 'push_and_open', 'push your code on github,'\
-         ' and open a PR if it is the first time'
+    desc 'push_and_open (po)', 'push your code on github,'\
+         ' and open a Pull Request on Github if none is openned'
     def push_and_open
       puts '##########################'.yellow
       puts '## Pushing to Github... ##'.yellow
@@ -61,7 +61,7 @@ module SafePusher
     end
     map po: :push_and_open
 
-    desc 'test_and_lint',
+    desc 'test_and_lint (tl)',
          'launch the test suite, then pronto if it is successful'
     def test_and_lint
       invoke :test
@@ -69,15 +69,18 @@ module SafePusher
     end
     map tl: :test_and_lint
 
-    desc 'lint_push_and_open', 'run your favorite linter, then push on github'
+    desc 'lint_push_and_open (lpo)',
+         'run your favorite linter, then push on github and open a'\
+         ' Pull Request on Github if none is openned'
     def lint_push_and_open
       invoke :lint
       invoke :push_and_open
     end
     map lpo: :lint_push_and_open
 
-    desc 'test_lint_push_and_open',
-         'run your favorite linters and tests, then push on github'
+    desc 'test_lint_push_and_open (tlpo)',
+         'run your favorite linters and tests, then push on github and open'\
+         'a Pull Request if none is openned'
     def test_lint_push_and_open
       invoke :test
       invoke :lint

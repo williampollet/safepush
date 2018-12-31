@@ -1,6 +1,6 @@
 module SafePusher
   class CLI < Thor
-    desc 'test (t)', 'launch the test suite with a return message'
+    desc 'test (t)', 'launch the test suite'
     def test
       puts '##########################'.yellow
       puts '## Testing new files... ##'.yellow
@@ -12,10 +12,10 @@ module SafePusher
     end
     map 't' => :test
 
-    desc 'lint (l)', 'launch pronto with a return message'
+    desc 'lint (l)', 'launch the linters'
     def lint
       puts '#######################'.yellow
-      puts '## Running pronto... ##'.yellow
+      puts '## Running linter... ##'.yellow
       puts '#######################'.yellow
 
       results = SafePusher::ProntoRunner.new.call
@@ -62,7 +62,7 @@ module SafePusher
     map 'po' => :push_and_open
 
     desc 'test_and_lint (tl)',
-         'launch the test suite, then pronto if it is successful'
+         'launch the test suite, then the linters if it is successful'
     def test_and_lint
       invoke :test
       invoke :lint

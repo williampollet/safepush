@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [0.2.0] - 2018-12-31
+Feature:
+ - Improve commands
+
 ## [0.1.3] - 2018-12-20
 Bugfix:
  - Do not take into account deleted files for rspec testing

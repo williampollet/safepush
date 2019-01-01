@@ -2,14 +2,15 @@
 
 [![Build Status](https://travis-ci.com/williampollet/safe_pusher.svg?branch=master)](https://travis-ci.com/williampollet/safe_pusher)
 
-Run your favorite linters and specs on the files you touched, before pushing your branch
+Run your favorite linters and specs on the files you touched, before pushing your branch.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add these lines to your application's Gemfile:
 
 ```ruby
-gem 'safe_pusher'
+# Lint and spec before pushing
+gem 'safe_pusher', require: false
 ```
 
 And then execute:
@@ -20,17 +21,15 @@ Or install it yourself as:
 
     $ gem install safe_pusher
 
-
 To use the gem fully, you should install [pronto](https://github.com/prontolabs/pronto) and [rspec](https://github.com/rspec/rspec) first.
 
 ## Configuration
 
-Generate the `binstubs` for `pronto` and `rspec`:
+Generate the `binstubs` for `pronto`, `rspec` and `safepush`:
 
-    $ bundler binstubs pronto
-    $ bundler binstubs rspec-core
+    $ bundler binstubs pronto rspec-core safe_pusher
 
-create the `safe_pusher.yml` file at the root of your application
+Create the `safe_pusher.yml` file at the root of your application:
 
 ```yaml
 files_to_skip:
@@ -46,11 +45,11 @@ To see the commands available, type:
 
     $ safepush
 
-To run pronto checks before to push on github run:
+To run pronto checks before you push to GitHub run:
 
     $ safepush ppush
 
-To run specs and pronto before to push on github run:
+To run specs and pronto before you push to GitHub run:
 
     $ safepush ppushtest
 

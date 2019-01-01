@@ -9,7 +9,7 @@ Run your favorite linters and specs on the files you touched, before pushing you
 Add these lines to your application's Gemfile:
 
 ```ruby
-# Lint and spec before pushing
+# Lint and launch specs before pushing.
 gem 'safe_pusher', require: false
 ```
 

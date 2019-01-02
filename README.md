@@ -1,6 +1,8 @@
 # SafePusher
 
 [![Build Status](https://travis-ci.com/williampollet/safe_pusher.svg?branch=master)](https://travis-ci.com/williampollet/safe_pusher)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1aa6c275f9ce4d4c6ec3/maintainability)](https://codeclimate.com/github/williampollet/safe_pusher/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1aa6c275f9ce4d4c6ec3/test_coverage)](https://codeclimate.com/github/williampollet/safe_pusher/test_coverage)
 
 Run your favorite linters and specs on the files you touched, before pushing your branch
 
@@ -49,7 +51,7 @@ To see the commands available, type:
 To run pronto checks before to push on github run:
 
     $ safepush lint_push_and_open
-    
+
 or
 
     $ safepush lpo
@@ -57,7 +59,7 @@ or
 To run specs and pronto before to push on github run:
 
     $ safepush test_lint_push_and_open
-    
+
 or
 
     $ safepush tlpo

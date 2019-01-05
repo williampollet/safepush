@@ -2,6 +2,11 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [0.2.2] - 2019-01-05
+Improvements:
+ - Removing thor
+ - Using custom CLI to handle multiple commands
+
 ## [0.2.1] - 2018-12-31
 Improvement:
  - Deprecating rainbow to install pronto and pronto Rubocop

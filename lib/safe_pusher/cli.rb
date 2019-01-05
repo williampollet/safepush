@@ -76,10 +76,10 @@ module SafePusher
 
     def display_help
       puts "Usage:\n"\
-      ' - test (t) # run the test suite'\
-      ' - lint (l) # run the linters'\
-      ' - push (p) # push on distant repository'\
-      ' - open (o) # open a pull request on the distant repository'
+      " - test (t) # run the test suite\n"\
+      " - lint (l) # run the linters\n"\
+      " - push (p) # push on distant repository\n"\
+      " - open (o) # open a pull request on the distant repository\n"
       ' - help (h) # show this usage message'
     end
   end

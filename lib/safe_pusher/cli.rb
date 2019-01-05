@@ -79,7 +79,7 @@ module SafePusher
       " - test (t) # run the test suite\n"\
       " - lint (l) # run the linters\n"\
       " - push (p) # push on distant repository\n"\
-      " - open (o) # open a pull request on the distant repository\n"
+      " - open (o) # open a pull request on the distant repository\n"\
       ' - help (h) # show this usage message'
     end
   end

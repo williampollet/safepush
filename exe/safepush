@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require 'safe_pusher'
 
-SafePusher::CLI.start
+SafePusher::CLI.new(arguments: ARGV).start

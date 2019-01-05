@@ -1,18 +1,47 @@
 module SafePusher
-  class CLI < Thor
-    desc 'test (t)', 'launch the test suite'
+  class CLI
+    attr_reader :arguments
+
+    def initialize(arguments:)
+      @arguments = arguments
+    end
+
+    def start
+      unless arguments_valid?
+        help
+
+        return
+      end
+
+      arguments.each do |command|
+        execute_command(command)
+      end
+    end
+
+    private
+
+    def execute_command(command)
+      case command
+      when 'test', 't'
+        test
+      when 'lint', 'l'
+        lint
+      when 'open', 'o'
+        open
+      when 'push', 'p'
+        push
+      end
+    end
+
     def test
       puts '##########################'.yellow
       puts '## Testing new files... ##'.yellow
       puts '##########################'.yellow
-
       results = SafePusher::RspecRunner.new.call
 
       exit results unless results == 0
     end
-    map 't' => :test
 
-    desc 'lint (l)', 'launch the linters'
     def lint
       puts '#######################'.yellow
       puts '## Running linter... ##'.yellow
@@ -22,9 +51,7 @@ module SafePusher
 
       exit results unless results == 0
     end
-    map 'l' => :lint
 
-    desc 'push (p)', 'push your code on github'
     def push
       puts '##########################'.yellow
       puts '## Pushing to Github... ##'.yellow
@@ -34,9 +61,7 @@ module SafePusher
 
       exit results unless results == 0
     end
-    map 'p' => :push
 
-    desc 'open (o)', 'open a pull request on github'
     def open
       puts '#########################################'.yellow
       puts '## Opening a pull request on Github... ##'.yellow
@@ -46,46 +71,21 @@ module SafePusher
 
       exit results unless results == 0
     end
-    map 'o' => :open
 
-    desc 'push_and_open (po)', 'push your code on github,'\
-         ' and open a Pull Request on Github if none is openned'
-    def push_and_open
-      puts '##########################'.yellow
-      puts '## Pushing to Github... ##'.yellow
-      puts '##########################'.yellow
-
-      results = SafePusher::GithubRunner.new.push_and_open
-
-      exit results unless results == 0
+    def arguments_valid?
+      arguments.join(' ') =~ /^(?!\s*$)(?:test|lint|push|open|t|l|p|o| )+$/
     end
-    map 'po' => :push_and_open
 
-    desc 'test_and_lint (tl)',
-         'launch the test suite, then the linters if it is successful'
-    def test_and_lint
-      invoke :test
-      invoke :lint
+    def help
+      puts "Usage:\n"\
+      " help (h) # show this usage message\n"\
+      " ##########################################################\n"\
+      " # you can use any combination of theese commands \n"\
+      " ##########################################################\n"\
+      " test (t) # run the test suite\n"\
+      " lint (l) # run the linters\n"\
+      " push (p) # push on distant repository\n"\
+      ' open (o) # open a pull request on the distant repository'
     end
-    map 'tl' => :test_and_lint
-
-    desc 'lint_push_and_open (lpo)',
-         'lanch the linters, then push on github and open a'\
-         ' Pull Request on Github if none is openned'
-    def lint_push_and_open
-      invoke :lint
-      invoke :push_and_open
-    end
-    map 'lpo' => :lint_push_and_open
-
-    desc 'test_lint_push_and_open (tlpo)',
-         'lanch the linters, launch test suite, then push on github and open'\
-         'a Pull Request if none is openned'
-    def test_lint_push_and_open
-      invoke :test
-      invoke :lint
-      invoke :push_and_open
-    end
-    map 'tlpo' => :test_lint_push_and_open
   end
 end

@@ -3,8 +3,8 @@ require 'spec_helper'
 RSpec.describe SafePusher::GithubRunner do
   let(:github_pusher) { described_class.new }
 
-  describe '#push_and_open' do
-    subject(:push_on_github) { github_pusher.push_and_open }
+  describe '#push' do
+    subject(:push_on_github) { github_pusher.push }
 
     before do
       allow(github_pusher).to receive(:system)
@@ -32,14 +32,6 @@ RSpec.describe SafePusher::GithubRunner do
           ).once,
         )
       end
-
-      it 'opens a pull request if the sync has succeded' do
-        push_on_github
-
-        expect(github_pusher).to(
-          have_received(:system).with(a_string_including('open')).once,
-        )
-      end
     end
   end
 
@@ -56,20 +48,6 @@ RSpec.describe SafePusher::GithubRunner do
       expect(github_pusher).to(
         have_received(:system).with(a_string_including('open')),
       )
-    end
-  end
-
-  describe '#push' do
-    subject(:push) { github_pusher.push }
-
-    before do
-      allow(github_pusher).to receive(:system)
-    end
-
-    it 'makes a mere push on github' do
-      push
-
-      expect(github_pusher).to have_received(:system).with('git push origin')
     end
   end
 end

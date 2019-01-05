@@ -4,7 +4,7 @@ require 'English'
 module SafePusher
   class GithubRunner
     def push_and_open
-      push
+      system('git push origin')
 
       exit_status = $CHILD_STATUS.exitstatus
 
@@ -14,15 +14,9 @@ module SafePusher
         push_and_set_upstream
 
         exit_status = $CHILD_STATUS.exitstatus
-
-        open if exit_status == 0
       end
 
       exit_status
-    end
-
-    def push
-      system('git push origin')
     end
 
     def open

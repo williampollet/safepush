@@ -73,8 +73,7 @@ module SafePusher
     end
 
     def arguments_valid?
-      arguments.join(' ') =~ /^(?!\s*$)(?:test|lint|push|open|t|l|p|o| )+$/ ||
-        arguments.join('') =~ /^(?!\s*$)(?:test|lint|push|open|t|l|p|o|)+$/
+      arguments.join(' ') =~ /^(?!\s*$)(?:test|lint|push|open|t|l|p|o| )+$/
     end
 
     def help

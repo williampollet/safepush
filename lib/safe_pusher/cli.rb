@@ -7,7 +7,11 @@ module SafePusher
     end
 
     def start
-      display_help unless arguments_valid?
+      unless arguments_valid?
+        help
+
+        return
+      end
 
       arguments.each do |command|
         execute_command(command)
@@ -16,18 +20,18 @@ module SafePusher
 
     private
 
-    def inspect_command(command)
+    def execute_command(command)
       case command
       when 'test', 't'
         test
       when 'lint', 'l'
         lint
       when 'open', 'o'
-        push
-      when 'push', 'p'
         open
+      when 'push', 'p'
+        push
       else
-        display_help
+        help
       end
     end
 
@@ -74,13 +78,16 @@ module SafePusher
       arguments.join(' ') =~ /^(?!\s*$)(?:test|lint|push|open| )+$/
     end
 
-    def display_help
+    def help
       puts "Usage:\n"\
-      " - test (t) # run the test suite\n"\
-      " - lint (l) # run the linters\n"\
-      " - push (p) # push on distant repository\n"\
-      " - open (o) # open a pull request on the distant repository\n"\
-      ' - help (h) # show this usage message'
+      " help (h) # show this usage message\n"\
+      " ##########################################################\n"\
+      " # you can use any combination of theese commands \n"\
+      " ##########################################################\n"\
+      " test (t) # run the test suite\n"\
+      " lint (l) # run the linters\n"\
+      " push (p) # push on distant repository\n"\
+      ' open (o) # open a pull request on the distant repository'
     end
   end
 end

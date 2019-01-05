@@ -3,7 +3,7 @@ require 'English'
 
 module SafePusher
   class GithubRunner
-    def push_and_open
+    def push
       system('git push origin')
 
       exit_status = $CHILD_STATUS.exitstatus

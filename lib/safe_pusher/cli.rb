@@ -30,8 +30,6 @@ module SafePusher
         open
       when 'push', 'p'
         push
-      else
-        help
       end
     end
 

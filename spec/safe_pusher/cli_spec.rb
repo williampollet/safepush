@@ -99,7 +99,7 @@ RSpec.describe SafePusher::CLI do
     end
 
     context 'when there is several commands' do
-      let(:command) { ['test', 'push'] }
+      let(:command) { %w[test push] }
 
       before do
         allow(SafePusher::RspecRunner).to receive(:new).and_return(rspec_runner)

@@ -49,19 +49,19 @@ To see the commands available, type:
 
 To run pronto checks before you push to GitHub run:
 
-    $ safepush lint_push_and_open
+    $ safepush lint push open
 
 or
 
-    $ safepush lpo
+    $ safepush l p o
 
 To run specs and pronto before you push to GitHub run:
 
-    $ safepush test_lint_push_and_open
+    $ safepush test lint push open
 
 or
 
-    $ safepush tlpo
+    $ safepush t l p o
 
 ## Contributing
 

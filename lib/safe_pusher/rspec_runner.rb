@@ -43,8 +43,6 @@ module SafePusher
     end
 
     def search_or_create_spec(file)
-      puts "#{file} has been modified, searching for specs..."
-
       spec_path = file.gsub(
         "#{SafePusher.configuration.app_base_directory}/",
         'spec/',
@@ -52,8 +50,8 @@ module SafePusher
 
       return create_new_spec(spec_path, file) unless File.exist?(spec_path)
 
-      puts "Spec found for #{file}, putting #{spec_path}"\
-           ' in the list of specs to run'
+      puts spec_path
+
       specs_to_execute << spec_path
     end
 

@@ -63,10 +63,11 @@ Documentation:
 # Do not verify the length of the blocks in DSLs.
 Metrics/BlockLength:
   Exclude:
-    - "**/*/spec/**/*"
+    - spec/**/*
     - lib/tasks/**/*
     - app/admin/**/*
     - config/routes.rb
+    - safe_pusher.gemspec
   ExcludedMethods:
     - included
 
@@ -136,27 +137,3 @@ Style/FormatStringToken:
 # Prefer `->` to `lambda`.
 Style/Lambda:
   EnforcedStyle: literal
-
-# Deactivate rule that makes `lambda` mandatory in defavor of `->`
-# when having blocks.
-Style/Lambda:
-  Enabled: false
-
-# Do not verify empty lines around blocks in specs
-Layout/EmptyLinesAroundBlockBody:
-  Exclude:
-    - spec/**/*
-
-# Allow using normal test doubles, since they are useful for mocking.
-# See https://github.com/KissKissBankBank/fashion_police/pull/34
-RSpec/VerifiedDoubles:
-  Enabled: false
-
-# Enable long blocs for Gemspec files
-Metrics/BlockLength:
-  Exclude:
-    - safe_pusher.gemspec
-
-Metrics/BlockLength:
-  Exclude:
-    - spec/**/*

@@ -141,5 +141,19 @@ RSpec.describe SafePusher::CLI do
         expect($stdout).to have_received(:puts)
       end
     end
+
+    context 'when command is --version' do
+      let(:command) { ['--version'] }
+
+      before do
+        allow($stdout).to receive(:puts)
+      end
+
+      it 'outputs the current version' do
+        start
+
+        expect($stdout).to have_received(:puts).with(SafePusher::VERSION)
+      end
+    end
   end
 end

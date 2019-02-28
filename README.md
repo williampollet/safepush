@@ -67,6 +67,32 @@ or
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/williampollet/safe_pusher. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+## Development
+
+Setup development:
+
+```sh
+$ bin/setup
+```
+
+Open a console:
+
+```sh
+$ bin/console
+```
+
+Test the CLI:
+
+```sh
+$ ruby -Ilib exe/safepush
+```
+
+Launch specs and lint:
+
+```sh
+$ rake
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

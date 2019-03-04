@@ -7,6 +7,8 @@ module SafePusher
     end
 
     def start
+      return version if arguments.first == '--version'
+
       unless arguments_valid?
         help
 
@@ -79,6 +81,7 @@ module SafePusher
     def help
       puts "Usage:\n"\
       " help (h) # show this usage message\n"\
+      " --version # print SafePusher version\n"\
       " ##########################################################\n"\
       " # you can use any combination of theese commands \n"\
       " ##########################################################\n"\
@@ -86,6 +89,10 @@ module SafePusher
       " lint (l) # run the linters\n"\
       " push (p) # push on distant repository\n"\
       ' open (o) # open a pull request on the distant repository'
+    end
+
+    def version
+      puts SafePusher::VERSION
     end
   end
 end

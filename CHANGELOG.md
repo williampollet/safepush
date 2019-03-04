@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## Unreleased
+Fix:
+ - Add `--version` to the CLI
+
 ## [0.2.2] - 2019-01-05
 Improvements:
  - Removing thor

@@ -7,7 +7,7 @@ require 'safe_pusher'
 require 'pry'
 
 RSpec.configure do |config|
-  config.before(:each) do
+  config.before do
     SafePusher.configure do |safe_pusher_config|
       safe_pusher_config.app_base_directory = 'lib'
       safe_pusher_config.files_to_skip = %w[

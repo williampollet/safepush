@@ -3,6 +3,9 @@
 This project adheres to [Semantic Versioning](http://semver.org)
 
 ## Unreleased
+Improvement:
+- Reduce RSpec runner verbosity
+
 Fix:
  - Add `--version` to the CLI
 

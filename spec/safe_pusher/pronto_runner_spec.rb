@@ -27,10 +27,9 @@ RSpec.describe SafePusher::ProntoRunner do
       it 'prints that an error has been found' do
         run_pronto
 
-        binding.pry
         expect($stderr).to(
           have_received(:write).with(
-            a_string_including('Pronto found somme errors...'),
+            a_string_including('Pronto found somme errors…'),
           ).once,
         )
       end

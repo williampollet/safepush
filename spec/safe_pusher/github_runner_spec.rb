@@ -18,6 +18,9 @@ RSpec.describe SafePusher::GithubRunner do
       )
     end
 
+
+
+
     context 'when the exit status is 128' do
       before do
         allow(github_pusher).to receive(:system)

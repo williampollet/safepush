@@ -9,6 +9,7 @@ require 'pry'
 RSpec.configure do |config|
   config.before do
     SafePusher.configure do |safe_pusher_config|
+      safe_pusher_config.base_branch = 'master'
       safe_pusher_config.app_base_directory = 'lib'
       safe_pusher_config.files_to_skip = %w[
         spec/spec_helper

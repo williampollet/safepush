@@ -14,7 +14,7 @@ RSpec.describe SafePusher::ProntoRunner do
       run_pronto
 
       expect(pronto_runner).to(
-        have_received(:system).with('bin/pronto run --exit-code'),
+        have_received(:system).with('bin/pronto run --exit-code -c master'),
       )
     end
 
@@ -29,7 +29,7 @@ RSpec.describe SafePusher::ProntoRunner do
 
         expect($stderr).to(
           have_received(:write).with(
-            a_string_including('Pronto found somme errors...'),
+            a_string_including('Pronto found somme errors…'),
           ).once,
         )
       end

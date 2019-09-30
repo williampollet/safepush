@@ -26,7 +26,7 @@ module SafePusher
     def modified_files
       diff = 'git diff --diff-filter=A --diff-filter=M --name-only'
 
-      `#{diff} $(git merge-base #{branch} master) #{branch}`
+      `#{diff} $(git merge-base #{branch} #{base_branch}) #{branch}`
         .split("\n")
         .uniq
     end
@@ -108,6 +108,10 @@ module SafePusher
 
     def app_base_directory
       %r{#{SafePusher.configuration.app_base_directory}\/.*\.rb$}
+    end
+
+    def base_branch
+      SafePusher.configuration.base_branch
     end
   end
 end

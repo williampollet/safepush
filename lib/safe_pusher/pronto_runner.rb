@@ -9,7 +9,7 @@ module SafePusher
 
       if exit_status != 0
         warn 'Pronto found somme errors... '\
-             'Fix them before pushing to master!'.red
+             'Fix them before pushing to Github!'.red
       else
         puts 'No errors found by pronto, go for next step!'.green
       end

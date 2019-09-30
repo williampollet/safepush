@@ -2,9 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
-## Unreleased
+## [0.3.2] - 2019-09-30
 Improvement:
 - Reduce RSpec runner verbosity
+- Allow the configuration the base branch
 
 Fix:
  - Add `--version` to the CLI

@@ -37,6 +37,7 @@ Create the `safe_pusher.yml` file at the root of your application:
 files_to_skip:
   - file/to/skip_1
   - file/to/skip/2
+base_branch: developement
 app_base_directory: app
 repo_url: https://github.com/williampollet/safe_pusher
 ```

@@ -8,8 +8,8 @@ module SafePusher
       exit_status = $CHILD_STATUS.exitstatus
 
       if exit_status != 0
-        warn 'Pronto found somme errors... '\
-             'Fix them before pushing to Github!'.red
+        warn 'Pronto found somme errors… ' \
+             'Fix them before pushing to GitHub!'.red
       else
         puts 'No errors found by pronto, go for next step!'.green
       end

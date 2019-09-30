@@ -5,7 +5,8 @@ module SafePusher
     # The configuration singleton
     attr_accessor :files_to_skip,
                   :app_base_directory,
-                  :repo_url
+                  :repo_url,
+                  :base_branch
 
     def initialize
       application_config =

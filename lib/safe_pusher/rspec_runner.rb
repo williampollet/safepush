@@ -109,5 +109,9 @@ module SafePusher
     def app_base_directory
       %r{#{SafePusher.configuration.app_base_directory}\/.*\.rb$}
     end
+
+    def base_branch
+      SafePusher.configuration.base_branch
+    end
   end
 end

@@ -20,7 +20,11 @@ module SafePusher
     private
 
     def run_pronto
-      system('bin/pronto run --exit-code')
+      system("bin/pronto run --exit-code -c #{base_branch}")
+    end
+
+    def base_branch
+      SafePusher.configuration.base_branch
     end
   end
 end

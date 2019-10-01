@@ -9,6 +9,7 @@ RSpec.describe SafePusher::CLI do
     let(:linter) { SafePusher::ProntoRunner.new }
     let(:pusher) { SafePusher::GithubRunner.new }
     let(:opener) { SafePusher::GithubRunner.new }
+    let(:git_runner) { SafePusher::GitRunner.new }
 
     context 'when command is test' do
       let(:command) { ['test'] }
@@ -54,6 +55,62 @@ RSpec.describe SafePusher::CLI do
       end
     end
 
+    context 'with a git command' do
+      before do
+        allow(SafePusher::GitRunner).to receive(:new).and_return(git_runner)
+        allow(git_runner).to receive(:call).and_return(0)
+        allow($stdout).to receive(:puts)
+      end
+
+      context 'when command is add' do
+        let(:command) { ['add'] }
+
+        it 'lanches the git runner' do
+          start
+
+          expect(git_runner).to have_received(:call)
+        end
+
+        it 'prints the informations' do
+          start
+
+          expect($stdout).to have_received(:puts).exactly(3).times
+        end
+      end
+
+      context 'when command is amend' do
+        let(:command) { ['amend'] }
+
+        it 'lanches the linter' do
+          start
+
+          expect(git_runner).to have_received(:call)
+        end
+
+        it 'prints the informations' do
+          start
+
+          expect($stdout).to have_received(:puts).exactly(3).times
+        end
+      end
+
+      context 'when command is commit' do
+        let(:command) { ['commit'] }
+
+        it 'lanches the git_runner' do
+          start
+
+          expect(git_runner).to have_received(:call)
+        end
+
+        it 'prints the informations' do
+          start
+
+          expect($stdout).to have_received(:puts).exactly(3).times
+        end
+      end
+    end
+
     context 'when command is push' do
       let(:command) { ['push'] }
 
@@ -63,7 +120,7 @@ RSpec.describe SafePusher::CLI do
         allow($stdout).to receive(:puts)
       end
 
-      it 'lanches the linter' do
+      it 'lanches the pusher' do
         start
 
         expect(pusher).to have_received(:push)

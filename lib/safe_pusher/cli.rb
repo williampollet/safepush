@@ -1,6 +1,16 @@
 module SafePusher
   class CLI
-    attr_reader :arguments
+    SHORTCUTS = {
+      't' => 'test',
+      'l' => 'lint',
+      'p' => 'push',
+      'o' => 'open',
+      'm' => 'amend',
+      'a' => 'add',
+      'c' => 'commit',
+    }.freeze
+
+    private_constant :SHORTCUTS
 
     def initialize(arguments:)
       @arguments = arguments
@@ -22,16 +32,13 @@ module SafePusher
 
     private
 
+    attr_reader :arguments
+
     def execute_command(command)
-      case command
-      when 'test', 't'
-        test
-      when 'lint', 'l'
-        lint
-      when 'open', 'o'
-        open
-      when 'push', 'p'
-        push
+      if SHORTCUTS[command]
+        send(SHORTCUTS[command])
+      else
+        send(command)
       end
     end
 
@@ -64,6 +71,36 @@ module SafePusher
       exit results unless results == 0
     end
 
+    def amend
+      puts '###################################'.yellow
+      puts '## Amending your last commit... ###'.yellow
+      puts '###################################'.yellow
+
+      results = SafePusher::GitRunner.new.amend
+
+      exit results unless results == 0
+    end
+
+    def add
+      puts '######################'.yellow
+      puts '## adding files... ###'.yellow
+      puts '######################'.yellow
+
+      results = SafePusher::GitRunner.new.add
+
+      exit results unless results == 0
+    end
+
+    def commit
+      puts '################################'.yellow
+      puts '## Commiting last changes... ###'.yellow
+      puts '################################'.yellow
+
+      results = SafePusher::GitRunner.new.commit
+
+      exit results unless results == 0
+    end
+
     def open
       puts '#########################################'.yellow
       puts '## Opening a pull request on Github... ##'.yellow
@@ -75,7 +112,14 @@ module SafePusher
     end
 
     def arguments_valid?
-      arguments.join(' ') =~ /^(?!\s*$)(?:test|lint|push|open|t|l|p|o| )+$/
+      arguments.join(' ') =~ valid_commands_regexp
+    end
+
+    def valid_commands_regexp
+      valid_commands = "#{SHORTCUTS.keys.join('|')}|"\
+        "#{SHORTCUTS.values.join('|')}"
+
+      /^(?!\s*$)(?:#{valid_commands}| )+$/
     end
 
     def help
@@ -87,6 +131,9 @@ module SafePusher
       " ##########################################################\n"\
       " test (t) # run the test suite\n"\
       " lint (l) # run the linters\n"\
+      " amend (m) # amend your last commit \n"\
+      " add (a) # add changes to be committed \n"\
+      " commit (c) # commit your staged changes \n"\
       " push (p) # push on distant repository\n"\
       ' open (o) # open a pull request on the distant repository'
     end

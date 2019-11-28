@@ -58,17 +58,20 @@ RSpec.describe SafePusher::CLI do
     context 'with a git command' do
       before do
         allow(SafePusher::GitRunner).to receive(:new).and_return(git_runner)
-        allow(git_runner).to receive(:call).and_return(0)
         allow($stdout).to receive(:puts)
       end
 
       context 'when command is add' do
         let(:command) { ['add'] }
 
+        before do
+          allow(git_runner).to receive(:add).and_return(0)
+        end
+
         it 'lanches the git runner' do
           start
 
-          expect(git_runner).to have_received(:call)
+          expect(git_runner).to have_received(:add)
         end
 
         it 'prints the informations' do
@@ -81,10 +84,14 @@ RSpec.describe SafePusher::CLI do
       context 'when command is amend' do
         let(:command) { ['amend'] }
 
+        before do
+          allow(git_runner).to receive(:amend).and_return(0)
+        end
+
         it 'lanches the linter' do
           start
 
-          expect(git_runner).to have_received(:call)
+          expect(git_runner).to have_received(:amend)
         end
 
         it 'prints the informations' do
@@ -97,10 +104,14 @@ RSpec.describe SafePusher::CLI do
       context 'when command is commit' do
         let(:command) { ['commit'] }
 
+        before do
+          allow(git_runner).to receive(:commit).and_return(0)
+        end
+
         it 'lanches the git_runner' do
           start
 
-          expect(git_runner).to have_received(:call)
+          expect(git_runner).to have_received(:commit)
         end
 
         it 'prints the informations' do
@@ -196,6 +207,38 @@ RSpec.describe SafePusher::CLI do
         start
 
         expect($stdout).to have_received(:puts)
+      end
+    end
+
+    context 'with shortcuts' do
+      context 'when there is several commands' do
+        let(:command) { %w[t p] }
+
+        before do
+          allow(SafePusher::RspecRunner).to receive(:new).and_return(rspec_runner)
+          allow(SafePusher::GithubRunner).to receive(:new).and_return(pusher)
+          allow(pusher).to receive(:push).and_return(0)
+          allow(rspec_runner).to receive(:call).and_return(0)
+          allow($stdout).to receive(:puts)
+        end
+
+        it 'prints the informations' do
+          start
+
+          expect($stdout).to have_received(:puts).exactly(6).times
+        end
+
+        it 'launches the tests' do
+          start
+
+          expect(rspec_runner).to have_received(:call)
+        end
+
+        it 'pushes on github' do
+          start
+
+          expect(pusher).to have_received(:push)
+        end
       end
     end
 

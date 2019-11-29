@@ -215,7 +215,8 @@ RSpec.describe SafePusher::CLI do
         let(:command) { %w[t p] }
 
         before do
-          allow(SafePusher::RspecRunner).to receive(:new).and_return(rspec_runner)
+          allow(SafePusher::RspecRunner)
+            .to receive(:new).and_return(rspec_runner)
           allow(SafePusher::GithubRunner).to receive(:new).and_return(pusher)
           allow(pusher).to receive(:push).and_return(0)
           allow(rspec_runner).to receive(:call).and_return(0)

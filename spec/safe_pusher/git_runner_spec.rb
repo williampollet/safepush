@@ -30,7 +30,7 @@ RSpec.describe SafePusher::GitRunner do
       add
 
       expect(git_runner).to(
-        have_received(:system).with('git add --patch').once,
+        have_received(:system).with('git add --interactive').once,
       )
     end
   end

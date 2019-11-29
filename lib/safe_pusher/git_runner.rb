@@ -10,7 +10,7 @@ module SafePusher
     end
 
     def add
-      system('git add --patch')
+      system('git add --interactive')
 
       $CHILD_STATUS.exitstatus
     end

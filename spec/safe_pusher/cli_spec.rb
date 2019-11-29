@@ -68,13 +68,13 @@ RSpec.describe SafePusher::CLI do
           allow(git_runner).to receive(:add).and_return(0)
         end
 
-        it 'lanches the git runner' do
+        it 'launches the git runner' do
           start
 
           expect(git_runner).to have_received(:add)
         end
 
-        it 'prints the informations' do
+        it 'prints the information' do
           start
 
           expect($stdout).to have_received(:puts).exactly(3).times
@@ -88,13 +88,13 @@ RSpec.describe SafePusher::CLI do
           allow(git_runner).to receive(:amend).and_return(0)
         end
 
-        it 'lanches the linter' do
+        it 'launches the linter' do
           start
 
           expect(git_runner).to have_received(:amend)
         end
 
-        it 'prints the informations' do
+        it 'prints the information' do
           start
 
           expect($stdout).to have_received(:puts).exactly(3).times
@@ -108,13 +108,13 @@ RSpec.describe SafePusher::CLI do
           allow(git_runner).to receive(:commit).and_return(0)
         end
 
-        it 'lanches the git_runner' do
+        it 'launches the git_runner' do
           start
 
           expect(git_runner).to have_received(:commit)
         end
 
-        it 'prints the informations' do
+        it 'prints the information' do
           start
 
           expect($stdout).to have_received(:puts).exactly(3).times
@@ -131,7 +131,7 @@ RSpec.describe SafePusher::CLI do
         allow($stdout).to receive(:puts)
       end
 
-      it 'lanches the pusher' do
+      it 'launches the pusher' do
         start
 
         expect(pusher).to have_received(:push)
@@ -211,7 +211,7 @@ RSpec.describe SafePusher::CLI do
     end
 
     context 'with shortcuts' do
-      context 'when there is several commands' do
+      context 'when there are several commands' do
         let(:command) { %w[t p] }
 
         before do
@@ -223,7 +223,7 @@ RSpec.describe SafePusher::CLI do
           allow($stdout).to receive(:puts)
         end
 
-        it 'prints the informations' do
+        it 'prints the information' do
           start
 
           expect($stdout).to have_received(:puts).exactly(6).times
@@ -235,7 +235,7 @@ RSpec.describe SafePusher::CLI do
           expect(rspec_runner).to have_received(:call)
         end
 
-        it 'pushes on github' do
+        it 'pushes' do
           start
 
           expect(pusher).to have_received(:push)

@@ -83,7 +83,7 @@ module SafePusher
 
     def add
       puts '######################'.yellow
-      puts '## adding files... ###'.yellow
+      puts '## Adding files... ###'.yellow
       puts '######################'.yellow
 
       results = SafePusher::GitRunner.new.add

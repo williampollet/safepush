@@ -10,7 +10,7 @@ RSpec.describe SafePusher::GitRunner do
       allow(git_runner).to receive(:system)
     end
 
-    it 'ament the commit' do
+    it 'amends the commit' do
       amend
 
       expect(git_runner).to(
@@ -45,7 +45,7 @@ RSpec.describe SafePusher::GitRunner do
       allow(STDIN).to receive(:gets).and_return(output)
     end
 
-    it 'opens a pull request on github' do
+    it 'creates a git commit' do
       commit
 
       expect(git_runner).to(

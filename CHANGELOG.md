@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [0.4.0] - 2019-11-29
+Features:
+ - Add `add`, `commit` and `amend` commands to the cli
+
 ## [0.3.0] - 2019-09-30
 Improvement:
 - Reduce RSpec runner verbosity

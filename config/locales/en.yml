@@ -1,0 +1,30 @@
+en:
+  help: |
+    Usage:\n
+    help (h) # show this usage message\n
+    --version # print SafePusher version\n
+    ##########################################################\n
+    # you can use any combination of theese commands \n
+    ##########################################################\n
+    test (t) # run the test suite\n
+    lint (l) # run the linters\n
+    amend (m) # amend your last commit \n
+    add (a) # add changes to be committed \n
+    commit (c) # commit your staged changes \n
+    push (p) # push on distant repository\n
+    open (o) # open a pull request on the distant repository
+  command:
+    add:
+      verbose: Testing new files...
+    commit:
+      verbose: Commiting last changes...
+    amend:
+      verbose: Amending last commit...
+    push:
+      verbose: Pushing to Github...
+    open:
+      verbose: Opening a pull request on Github...
+    lint:
+      verbose: Linting tracked changes...
+    test:
+      verbose: Testing new files...

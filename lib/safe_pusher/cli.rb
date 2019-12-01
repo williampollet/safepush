@@ -2,18 +2,6 @@ require 'pry'
 
 module SafePusher
   class CLI
-    SHORTCUTS = {
-      't' => 'test',
-      'l' => 'lint',
-      'p' => 'push',
-      'o' => 'open',
-      'm' => 'amend',
-      'a' => 'add',
-      'c' => 'commit',
-    }.freeze
-
-    private_constant :SHORTCUTS
-
     def initialize(arguments:)
       @arguments = arguments
     end
@@ -21,15 +9,9 @@ module SafePusher
     def start
       return version if arguments.first == '--version'
 
-      unless arguments_valid?
-        help
+      help if commands.include?(nil)
 
-        return
-      end
-
-      arguments.each do |command|
-        execute_command(SHORTCUTS[command] || command)
-      end
+      commands.compact.each { |command| execute_command(command) }
     end
 
     private
@@ -47,15 +29,12 @@ module SafePusher
       exit results unless results == 0
     end
 
-    def arguments_valid?
-      arguments.join(' ') =~ valid_commands_regexp
-    end
+    def commands
+      arguments.map do |arg|
+        next unless arg =~ valid_commands_regexp
 
-    def valid_commands_regexp
-      valid_commands =
-        "#{SHORTCUTS.keys.join('|')}|#{SHORTCUTS.values.join('|')}"
-
-      /^(?!\s*$)(?:#{valid_commands}| )+$/
+        shortcut_to_command[arg] || arg
+      end
     end
 
     def version
@@ -70,12 +49,27 @@ module SafePusher
       puts I18n.t('help')
     end
 
+    def valid_commands_regexp
+      @valid_commands_regexp ||= /^(?!\s*$)(?:#{available_commands})$/
+    end
+
+    def available_commands
+      @available_commands ||= "#{shortcut_to_command.keys.join('|')}|"\
+        "#{shortcut_to_command.values.join('|')}"
+    end
+
     def verbose
       @verbose ||= SafePusher.configuration.verbose
     end
 
     def services
       @services ||= SafePusher.configuration.services
+    end
+
+    def shortcut_to_command
+      @shortcut_to_command ||= YAML
+        .load_file('config/commands.yml')
+        .reduce({}) { |o, (k, v)| o.update(v['shortcut'] => k) }
     end
   end
 end

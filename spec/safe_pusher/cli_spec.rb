@@ -208,6 +208,20 @@ RSpec.describe SafePusher::CLI do
 
         expect($stdout).to have_received(:puts)
       end
+
+      context 'when command is invalid' do
+        let(:command) { ['popo'] }
+
+        before do
+          allow($stdout).to receive(:puts)
+        end
+
+        it 'prints the help' do
+          start
+
+          expect($stdout).to have_received(:puts)
+        end
+      end
     end
 
     context 'with shortcuts' do

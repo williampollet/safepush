@@ -1,5 +1,3 @@
-require 'pry'
-
 module SafePusher
   class CLI
     def initialize(arguments:)

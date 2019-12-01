@@ -1,0 +1,21 @@
+test:
+  shortcut: t
+  default_client: rspec
+lint:
+  shortcut: l
+  default_client: pronto
+push:
+  shortcut: p
+  default_client: github
+open:
+  shortcut: o
+  default_client: github
+add:
+  shortcut: a
+  default_client: git
+amend:
+  shortcut: m
+  default_client: git
+commit:
+  shortcut: c
+  default_client: git

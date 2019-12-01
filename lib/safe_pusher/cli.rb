@@ -28,7 +28,7 @@ module SafePusher
     end
 
     def commands
-      arguments.map do |arg|
+      @commands ||= arguments.map do |arg|
         next unless arg =~ valid_commands_regexp
 
         shortcut_to_command[arg] || arg

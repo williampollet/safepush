@@ -19,8 +19,8 @@ module SafePusher
     def execute_command(command)
       explain(command) if verbose
 
-      results = Kernel
-        .const_get("SafePusher::Client::#{services[command].capitalize}")
+      results = SafePusher::Client
+        .const_get(services[command].capitalize)
         .new
         .public_send(command)
 
@@ -52,8 +52,9 @@ module SafePusher
     end
 
     def available_commands
-      @available_commands ||= "#{shortcut_to_command.keys.join('|')}|"\
-        "#{shortcut_to_command.values.join('|')}"
+      @available_commands ||= (
+        shortcut_to_command.keys + shortcut_to_command.values
+      ).join('|')
     end
 
     def verbose

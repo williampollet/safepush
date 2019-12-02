@@ -79,7 +79,7 @@ You can easily add a new client, or a new command.
 
 ### To add a client 
  - create the client api under `lib/safe_pusher/client/***.rb`
- - require it in `lib/safepusher.rb`
+ - require it in `lib/safe_pusher.rb`
  - write the specs for your client, then submit a PR
  - You will be able to specify in which command to use it, via the configuration ! 
 

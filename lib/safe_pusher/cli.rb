@@ -1,17 +1,5 @@
 module SafePusher
   class CLI
-    SHORTCUTS = {
-      't' => 'test',
-      'l' => 'lint',
-      'p' => 'push',
-      'o' => 'open',
-      'm' => 'amend',
-      'a' => 'add',
-      'c' => 'commit',
-    }.freeze
-
-    private_constant :SHORTCUTS
-
     def initialize(arguments:)
       @arguments = arguments
     end
@@ -19,15 +7,9 @@ module SafePusher
     def start
       return version if arguments.first == '--version'
 
-      unless arguments_valid?
-        help
+      help if commands.include?(nil)
 
-        return
-      end
-
-      arguments.each do |command|
-        execute_command(command)
-      end
+      commands.compact.each { |command| execute_command(command) }
     end
 
     private
@@ -35,111 +17,58 @@ module SafePusher
     attr_reader :arguments
 
     def execute_command(command)
-      if SHORTCUTS[command]
-        send(SHORTCUTS[command])
-      else
-        send(command)
+      explain(command) if verbose
+
+      results = SafePusher::Client
+        .const_get(services[command].capitalize)
+        .new
+        .public_send(command)
+
+      exit results unless results == 0
+    end
+
+    def commands
+      @commands ||= arguments.map do |arg|
+        next unless arg =~ valid_commands_regexp
+
+        shortcut_to_command[arg] || arg
       end
-    end
-
-    def test
-      puts '##########################'.yellow
-      puts '## Testing new files... ##'.yellow
-      puts '##########################'.yellow
-      results = SafePusher::RspecRunner.new.call
-
-      exit results unless results == 0
-    end
-
-    def lint
-      puts '#######################'.yellow
-      puts '## Running linter... ##'.yellow
-      puts '#######################'.yellow
-
-      results = SafePusher::ProntoRunner.new.call
-
-      exit results unless results == 0
-    end
-
-    def push
-      puts '##########################'.yellow
-      puts '## Pushing to Github... ##'.yellow
-      puts '##########################'.yellow
-
-      results = SafePusher::GithubRunner.new.push
-
-      exit results unless results == 0
-    end
-
-    def amend
-      puts '###################################'.yellow
-      puts '## Amending your last commit... ###'.yellow
-      puts '###################################'.yellow
-
-      results = SafePusher::GitRunner.new.amend
-
-      exit results unless results == 0
-    end
-
-    def add
-      puts '######################'.yellow
-      puts '## Adding files... ###'.yellow
-      puts '######################'.yellow
-
-      results = SafePusher::GitRunner.new.add
-
-      exit results unless results == 0
-    end
-
-    def commit
-      puts '################################'.yellow
-      puts '## Commiting last changes... ###'.yellow
-      puts '################################'.yellow
-
-      results = SafePusher::GitRunner.new.commit
-
-      exit results unless results == 0
-    end
-
-    def open
-      puts '#########################################'.yellow
-      puts '## Opening a pull request on Github... ##'.yellow
-      puts '#########################################'.yellow
-
-      results = SafePusher::GithubRunner.new.open
-
-      exit results unless results == 0
-    end
-
-    def arguments_valid?
-      arguments.join(' ') =~ valid_commands_regexp
-    end
-
-    def valid_commands_regexp
-      valid_commands = "#{SHORTCUTS.keys.join('|')}|"\
-        "#{SHORTCUTS.values.join('|')}"
-
-      /^(?!\s*$)(?:#{valid_commands}| )+$/
-    end
-
-    def help
-      puts "Usage:\n"\
-      " help (h) # show this usage message\n"\
-      " --version # print SafePusher version\n"\
-      " ##########################################################\n"\
-      " # you can use any combination of theese commands \n"\
-      " ##########################################################\n"\
-      " test (t) # run the test suite\n"\
-      " lint (l) # run the linters\n"\
-      " amend (m) # amend your last commit \n"\
-      " add (a) # add changes to be committed \n"\
-      " commit (c) # commit your staged changes \n"\
-      " push (p) # push on distant repository\n"\
-      ' open (o) # open a pull request on the distant repository'
     end
 
     def version
       puts SafePusher::VERSION
+    end
+
+    def explain(command)
+      puts I18n.t("command.#{command}.verbose").yellow
+    end
+
+    def help
+      puts I18n.t('help')
+    end
+
+    def valid_commands_regexp
+      @valid_commands_regexp ||= /^(?!\s*$)(?:#{available_commands})$/
+    end
+
+    def available_commands
+      @available_commands ||= (
+        shortcut_to_command.keys + shortcut_to_command.values
+      ).join('|')
+    end
+
+    def verbose
+      @verbose ||= SafePusher.configuration.verbose
+    end
+
+    def services
+      @services ||= SafePusher.configuration.services
+    end
+
+    def shortcut_to_command
+      @shortcut_to_command ||= YAML
+        .load_file('config/commands.yml')
+        .reduce({}) { |o, (k, v)| o.update(v['shortcut'] => k) }
     end
   end
 end

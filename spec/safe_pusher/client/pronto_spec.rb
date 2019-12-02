@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-RSpec.describe SafePusher::ProntoRunner do
-  describe '#call' do
-    subject(:run_pronto) { pronto_runner.call }
+RSpec.describe SafePusher::Client::Pronto do
+  describe '#lint' do
+    subject(:run_pronto) { pronto_runner.lint }
 
     let(:pronto_runner) { described_class.new }
 

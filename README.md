@@ -4,7 +4,7 @@
 
 # SafePusher
 
-Run your favorite linters and specs on the files you touched, before pushing your branch.
+Run your favorite linters and specs on the files you touched, before committing and pushing your branch.
 
 ## Installation
 

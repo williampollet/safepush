@@ -1,8 +1,5 @@
-require 'yaml'
-# Configuration variables and defaults
 module SafePusher
   class Configuration
-    # The configuration singleton
     attr_accessor :files_to_skip,
                   :app_base_directory,
                   :repo_url,
@@ -27,7 +24,7 @@ module SafePusher
       YAML
         .load_file('config/commands.yml')
         .reduce({}) { |o, (k, v)| o.update(k => v['default_client']) }
-        .merge(application_config['services'])
+        .merge(application_config['services'] || {})
     end
 
     def application_config

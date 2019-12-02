@@ -40,6 +40,15 @@ files_to_skip:
 base_branch: developement # default master
 app_base_directory: app
 repo_url: https://github.com/williampollet/safe_pusher
+services:
+  test: rspec
+  lint: pronto
+  push: github
+  open: github
+  add: git
+  amend: git
+  commit: git
+verbose: true
 ```
 
 ## Usage

@@ -73,13 +73,13 @@ or
     $ safepush t l p o
 
 ### Available commands so far
- - test (runs the tests only on the files you touched)
- - lint (runs a linter only on the files you touched)
- - commit (commit your changes)
- - add (track your changes)
- - amend (amend your tracked changes to your last commit)
- - push (push and set upstream your local branch on github)
- - open (open a pull request on github)
+ - `test` (runs the tests only on the files you touched)
+ - `lint` (runs a linter only on the files you touched)
+ - `commit` (commit your changes)
+ - `add` (track your changes)
+ - `amend` (amend your tracked changes to your last commit)
+ - `push` (push and set upstream your local branch on github)
+ - `open` (open a pull request on github)
 
 ## Contributing
 

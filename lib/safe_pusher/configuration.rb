@@ -8,8 +8,6 @@ module SafePusher
                   :services
 
     def initialize
-      initialize_locales
-
       @verbose = application_config['verbose'] || true
       @base_branch = application_config['base_branch'] || 'master'
       @files_to_skip = application_config['files_to_skip'] || []
@@ -31,10 +29,6 @@ module SafePusher
       return YAML.load_file('safe_pusher.yml') if File.exist?('safe_pusher.yml')
 
       {}
-    end
-
-    def initialize_locales
-      I18n.load_path << Dir[File.expand_path('config/locales') + '/*.yml']
     end
   end
 end

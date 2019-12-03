@@ -54,7 +54,7 @@ module SafePusher
       end
 
       def index_file(file)
-        puts "#{file} modified, putting it in the list of specs to run"
+        puts I18n.t('command.test.file_put_in_test_list', file: file)
         specs_to_execute << file
       end
 
@@ -66,7 +66,7 @@ module SafePusher
 
       def run_specs
         if specs_to_execute.empty?
-          puts 'no spec analyzed, passing to the next step'.green
+          puts I18n.t('command.test.no_spec_analyzed').green
           return 0
         end
 
@@ -75,27 +75,32 @@ module SafePusher
         exit_status = $CHILD_STATUS.exitstatus
 
         if exit_status != 0
-          puts 'Oops, a spec seems to be red or empty, '\
-               'be sure to complete it before you push'.red
+          puts spec_failing_or_missing
         else
-          puts 'Every spec operational, '\
-               'passing to the next step!'.green
+          puts every_spec_operational
         end
 
         exit_status
       end
 
       def create_new_spec(spec_path, file_matched)
-        puts "no spec found for file #{file_matched},"\
-             " would you like to add #{spec_path}? (Yn)"
+        puts I18n.t(
+          'command.test.no_spec_found_for_file',
+          file_matched: file_matched,
+          spec_path: spec_path,
+        )
+
         result = STDIN.gets.chomp
 
         if result.casecmp('n') == 0
-          puts 'Alright, skipping the test for now!'
+          puts I18n.t('command.test.test_skipped')
+
           return 0
         else
-          File.open(spec_path, 'w') {}
-          warn 'A spec needs to be written!'.red
+          create_new_file(spec_path)
+
+          warn I18n.t('command.test.spec_needs_to_be_written').red
+
           return 1
         end
       end
@@ -104,12 +109,27 @@ module SafePusher
         `git rev-parse --abbrev-ref HEAD`.delete("\n")
       end
 
+      def create_new_file(path)
+        parent_directory = path.slice(0, path.rindex('/'))
+
+        FileUtils.mkdir_p(parent_directory) unless File.exist?(parent_directory)
+        File.open(path, 'w') {}
+      end
+
       def app_base_directory
         %r{#{SafePusher.configuration.app_base_directory}\/.*\.rb$}
       end
 
       def base_branch
         SafePusher.configuration.base_branch
+      end
+
+      def spec_failing_or_missing
+        I18n.t('command.test.spec_failing_or_missing').red
+      end
+
+      def every_spec_operational
+        I18n.t('command.test.every_spec_operational').green
       end
     end
   end

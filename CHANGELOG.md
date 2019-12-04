@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [0.4.1] - 2019-12-04
+Improvement:
+- Generate the folder of a spec, if not already existing
+
 ## [0.4.0] - 2019-11-29
 Features:
  - Add `add`, `commit` and `amend` commands to the cli

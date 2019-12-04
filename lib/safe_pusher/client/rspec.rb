@@ -101,7 +101,7 @@ module SafePusher
 
           warn I18n.t('command.test.spec_needs_to_be_written').red
 
-          return 1
+          1
         end
       end
 

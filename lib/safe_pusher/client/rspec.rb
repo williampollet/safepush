@@ -113,7 +113,7 @@ module SafePusher
         parent_directory = File.dirname(path)
 
         FileUtils.mkdir_p(parent_directory) unless File.exist?(parent_directory)
-        File.open(path, 'w') {}
+        FileUtils.touch(path)
       end
 
       def app_base_directory

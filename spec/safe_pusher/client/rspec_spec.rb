@@ -39,7 +39,7 @@ RSpec.describe SafePusher::Client::Rspec do
       expect($stdout).to(
         have_received(:puts).with(
           a_string_including(
-            'no spec analyzed, passing to the next step',
+            'No spec found, going to the next step',
           ),
         ),
       )
@@ -138,7 +138,7 @@ RSpec.describe SafePusher::Client::Rspec do
               expect($stdout).to(
                 have_received(:puts).with(
                   a_string_including(
-                    'Every spec operational, passing to the next step!',
+                    'Every spec operational, going to the next step!',
                   ),
                 ),
               )

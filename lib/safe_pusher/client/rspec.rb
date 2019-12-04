@@ -110,7 +110,7 @@ module SafePusher
       end
 
       def create_new_file(path)
-        parent_directory = path.slice(0, path.rindex('/'))
+        parent_directory = File.dirname(path)
 
         FileUtils.mkdir_p(parent_directory) unless File.exist?(parent_directory)
         File.open(path, 'w') {}

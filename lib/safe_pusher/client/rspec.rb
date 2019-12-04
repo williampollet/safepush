@@ -95,7 +95,7 @@ module SafePusher
         if result.casecmp('n') == 0
           puts I18n.t('command.test.test_skipped')
 
-          return 0
+          0
         else
           create_new_file(spec_path)
 

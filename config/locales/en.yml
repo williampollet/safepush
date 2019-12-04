@@ -29,9 +29,9 @@ en:
     test:
       verbose: 'Testing new files...'
       test_skipped: 'Alright, skipping the test for now!'
-      no_spec_found_for_file: 'no spec found for file %{file_matched}, would you like to add %{spec_path}? (Yn)'
+      no_spec_found_for_file: 'No spec found for file %{file_matched}, would you like to add %{spec_path}? (Yn)'
       spec_needs_to_be_written: 'A spec needs to be written!'
-      no_spec_analyzed: 'no spec analyzed, passing to the next step'
+      no_spec_analyzed: 'No spec found, going to the next step'
       file_put_in_test_list: '%{file} modified, putting it in the list of specs to run'
       spec_failing_or_missing: 'Oops, a spec seems to be red or empty, be sure to complete it before you push'
-      every_spec_operational: 'Every spec operational, passing to the next step!'
+      every_spec_operational: 'Every spec operational, going to the next step!'

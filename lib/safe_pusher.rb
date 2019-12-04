@@ -12,7 +12,7 @@ require 'safe_pusher/client/rspec'
 require 'safe_pusher/client/pronto'
 require 'safe_pusher/client/github'
 
-I18n.load_path << Dir[File.expand_path('config/locales') + '/*.yml']
+I18n.load_path << Dir[File.expand_path('config/locales/*.yml')]
 
 module SafePusher
   # Configuration setup

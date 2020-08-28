@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [0.4.2] - 2020-08-28
+Fix:
+ - Do not inject the locales files directly in the load path but add them instead.
+
 ## [0.4.1] - 2019-12-04
 Improvement:
 - Generate the folder of a spec, if not already existing

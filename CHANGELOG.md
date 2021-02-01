@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [0.4.3] - 2021-02-01
+Fix:
+ - Do not erase the app locales files.
+
 ## [0.4.2] - 2020-08-28
 Fix:
  - Do not inject the locales files directly in the load path but add them instead.

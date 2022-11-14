@@ -14,7 +14,7 @@ require 'safe_pusher/client/github'
 
 I18n.config.available_locales = :en
 
-I18n.load_path += ["#{File.expand_path('config/locales')}/en.yml"]
+I18n.load_path += ["#{__dir__}/../config/locales/en.yml"]
 
 module SafePusher
   # Configuration setup

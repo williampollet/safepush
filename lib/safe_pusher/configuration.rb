@@ -20,7 +20,7 @@ module SafePusher
 
     def load_services
       YAML
-        .load_file('./../../config/commands.yml')
+        .load_file(File.expand_path('config/commands.yml'))
         .reduce({}) { |o, (k, v)| o.update(k => v['default_client']) }
         .merge(application_config['services'] || {})
     end

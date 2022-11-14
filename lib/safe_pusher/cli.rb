@@ -67,7 +67,7 @@ module SafePusher
 
     def shortcut_to_command
       @shortcut_to_command ||= YAML
-        .load_file('config/commands.yml')
+        .load_file('./config/commands.yml')
         .reduce({}) { |o, (k, v)| o.update(v['shortcut'] => k) }
     end
   end

@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [0.5.1] - 2022-11-14
+Fix: 
+  - Config / commands file
+
 ## [0.4.3] - 2021-02-01
 Fix:
  - Do not erase the app locales files.

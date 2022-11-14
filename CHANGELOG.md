@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning](http://semver.org)
 
-## [0.5.2] - 2022-11-14
+## [0.5.4] - 2022-11-14
 Fix:
   - Config / commands file
 

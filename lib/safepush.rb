@@ -1,22 +1,22 @@
-require 'safe_pusher/configuration'
+require 'safepush/configuration'
 require 'thor'
 require 'colorize'
 require 'English'
 require 'i18n'
 require 'yaml'
 require 'fileutils'
-require 'safe_pusher/cli'
-require 'safe_pusher/version'
-require 'safe_pusher/client/git'
-require 'safe_pusher/client/rspec'
-require 'safe_pusher/client/pronto'
-require 'safe_pusher/client/github'
+require 'safepush/cli'
+require 'safepush/version'
+require 'safepush/client/git'
+require 'safepush/client/rspec'
+require 'safepush/client/pronto'
+require 'safepush/client/github'
 
 I18n.config.available_locales = :en
 
 I18n.load_path += ["#{__dir__}/../config/locales/en.yml"]
 
-module SafePusher
+module Safepush
   # Configuration setup
   class << self
     attr_writer :configuration

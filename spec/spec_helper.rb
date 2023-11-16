@@ -3,19 +3,19 @@ SimpleCov.start
 
 require 'bundler/setup'
 require 'yaml'
-require 'safe_pusher'
+require 'safepush'
 require 'pry'
 
 RSpec.configure do |config|
   config.before do
-    SafePusher.configure do |safe_pusher_config|
-      safe_pusher_config.base_branch = 'master'
-      safe_pusher_config.app_base_directory = 'lib'
-      safe_pusher_config.files_to_skip = %w[
+    Safepush.configure do |safepush_config|
+      safepush_config.base_branch = 'master'
+      safepush_config.app_base_directory = 'lib'
+      safepush_config.files_to_skip = %w[
         spec/spec_helper
       ]
-      safe_pusher_config.repo_url =
-        'https://github.com/williampollet/safe_pusher'
+      safepush_config.repo_url =
+        'https://github.com/williampollet/safepush'
     end
   end
 

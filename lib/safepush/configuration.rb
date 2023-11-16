@@ -1,4 +1,4 @@
-module SafePusher
+module Safepush
   class Configuration
     attr_accessor :files_to_skip,
                   :app_base_directory,
@@ -26,7 +26,7 @@ module SafePusher
     end
 
     def application_config
-      return YAML.load_file('safe_pusher.yml') if File.exist?('safe_pusher.yml')
+      return YAML.load_file('safepush.yml') if File.exist?('safepush.yml')
 
       {}
     end

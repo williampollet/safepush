@@ -2,7 +2,7 @@ en:
   help: |
     Usage:
     help (h) # show this usage message
-    --version # print SafePusher version
+    --version # print Safepush version
     ##########################################################
     # you can use any combination of theese commands
     ##########################################################

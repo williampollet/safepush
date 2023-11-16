@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe SafePusher::Client::Github do
+RSpec.describe Safepush::Client::Github do
   let(:github_pusher) { described_class.new }
 
   describe '#push' do

@@ -9,7 +9,7 @@
 /tmp/
 bin/
 /*.gem
-/safe_pusher.yml
+/Safepush.yml
 
 # rspec failure tracking
 .rspec_status

@@ -1,4 +1,4 @@
-module SafePusher
+module Safepush
   module Client
     class Git
       def amend

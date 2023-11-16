@@ -40,7 +40,7 @@ Improvement:
  - Deprecating rainbow to install pronto and pronto Rubocop
 
 Notes:
-This version of SafePusher use rainbow 2.2, that can be incompatible with
+This version of Safepush use rainbow 2.2, that can be incompatible with
 the latest version of React On Rails (for instance).
 Previous versions of the gem use rainbow 3.0.
 

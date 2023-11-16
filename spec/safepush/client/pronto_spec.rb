@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe SafePusher::Client::Pronto do
+RSpec.describe Safepush::Client::Pronto do
   describe '#lint' do
     subject(:run_pronto) { pronto_runner.lint }
 

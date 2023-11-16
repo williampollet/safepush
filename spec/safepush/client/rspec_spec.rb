@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe SafePusher::Client::Rspec do
+RSpec.describe Safepush::Client::Rspec do
   subject(:run_specs) { rspec_runner.test }
 
   let(:rspec_runner) { described_class.new }
@@ -57,7 +57,7 @@ RSpec.describe SafePusher::Client::Rspec do
         allow(rspec_runner).to(
           receive(:`).with(
             a_string_including('git diff'),
-          ).and_return('spec/safe_pusher/client/github.rb'),
+          ).and_return('spec/safepush/client/github.rb'),
         )
       end
 
@@ -73,10 +73,10 @@ RSpec.describe SafePusher::Client::Rspec do
     context 'when the files are in the app base directory' do
       describe 'when the files are filtered by the files_to_skip list' do
         before do
-          SafePusher.configure do |safe_pusher_config|
-            safe_pusher_config.files_to_skip = %w[
+          Safepush.configure do |safepush_config|
+            safepush_config.files_to_skip = %w[
               spec/spec_helper
-              lib/safe_pusher/client/github
+              lib/safepush/client/github
             ]
           end
 
@@ -84,13 +84,13 @@ RSpec.describe SafePusher::Client::Rspec do
           allow(rspec_runner).to(
             receive(:`).with(
               a_string_including('git diff'),
-            ).and_return('lib/safe_pusher/client/github.rb'),
+            ).and_return('lib/safepush/client/github.rb'),
           )
         end
 
         after do
-          SafePusher.configure do |safe_pusher_config|
-            safe_pusher_config.files_to_skip = %w[
+          Safepush.configure do |safepush_config|
+            safepush_config.files_to_skip = %w[
               spec/spec_helper
             ]
           end
@@ -110,7 +110,7 @@ RSpec.describe SafePusher::Client::Rspec do
           allow(rspec_runner).to(
             receive(:`).with(
               a_string_including('git diff'),
-            ).and_return('lib/safe_pusher/client/github.rb'),
+            ).and_return('lib/safepush/client/github.rb'),
           )
           allow(rspec_runner).to(
             receive(:system).with(a_string_including('bin/rspec')),
@@ -171,7 +171,7 @@ RSpec.describe SafePusher::Client::Rspec do
               allow(rspec_runner).to(
                 receive(:`).with(
                   a_string_including('git diff'),
-                ).and_return('lib/safe_pusher/github_runner_with_no_specs.rb'),
+                ).and_return('lib/safepush/github_runner_with_no_specs.rb'),
               )
               allow(STDIN).to receive(:gets).and_return(
                 double('getter', chomp: 'n'),
@@ -201,7 +201,7 @@ RSpec.describe SafePusher::Client::Rspec do
               allow(rspec_runner).to(
                 receive(:`).with(
                   a_string_including('git diff'),
-                ).and_return('lib/safe_pusher/github_runner_with_no_specs.rb'),
+                ).and_return('lib/safepush/github_runner_with_no_specs.rb'),
               )
               allow(STDIN).to receive(:gets).and_return(
                 double('getter', chomp: 'Y'),

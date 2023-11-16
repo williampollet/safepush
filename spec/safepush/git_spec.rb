@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe SafePusher::Client::Git do
+RSpec.describe Safepush::Client::Git do
   let(:git_runner) { described_class.new }
 
   describe '#amend' do

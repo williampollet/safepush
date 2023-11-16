@@ -1,4 +1,4 @@
-module SafePusher
+module Safepush
   module Client
     class Pronto
       def lint
@@ -22,7 +22,7 @@ module SafePusher
       end
 
       def base_branch
-        SafePusher.configuration.base_branch
+        Safepush.configuration.base_branch
       end
     end
   end

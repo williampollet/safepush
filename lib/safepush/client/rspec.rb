@@ -1,4 +1,4 @@
-module SafePusher
+module Safepush
   module Client
     class Rspec
       def initialize
@@ -42,7 +42,7 @@ module SafePusher
 
       def search_or_create_spec(file)
         spec_path = file.gsub(
-          "#{SafePusher.configuration.app_base_directory}/",
+          "#{Safepush.configuration.app_base_directory}/",
           'spec/',
         ).gsub('.rb', '_spec.rb')
 
@@ -60,7 +60,7 @@ module SafePusher
 
       def files_to_skip
         Regexp.new(
-          SafePusher.configuration.files_to_skip.join('|').gsub('/', '\/'),
+          Safepush.configuration.files_to_skip.join('|').gsub('/', '\/'),
         )
       end
 
@@ -117,11 +117,11 @@ module SafePusher
       end
 
       def app_base_directory
-        %r{#{SafePusher.configuration.app_base_directory}\/.*\.rb$}
+        %r{#{Safepush.configuration.app_base_directory}\/.*\.rb$}
       end
 
       def base_branch
-        SafePusher.configuration.base_branch
+        Safepush.configuration.base_branch
       end
 
       def spec_failing_or_missing

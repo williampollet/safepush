@@ -1,4 +1,4 @@
-module SafePusher
+module Safepush
   module Client
     class Github
       def push
@@ -19,7 +19,7 @@ module SafePusher
 
       def open
         system(
-          "open '#{SafePusher.configuration.repo_url}/pull/new/#{branch}'",
+          "open '#{Safepush.configuration.repo_url}/pull/new/#{branch}'",
         )
       end
 

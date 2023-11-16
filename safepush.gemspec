@@ -1,16 +1,16 @@
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'safe_pusher/version'
+require 'safepush/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'safe_pusher'
-  spec.version       = SafePusher::VERSION
+  spec.name          = 'safepush'
+  spec.version       = Safepush::VERSION
   spec.authors       = ['William Pollet']
-  spec.email         = ['william.pollet@kisskissbankbank.com']
+  spec.email         = ['polletwilliam@gmail.com']
 
   spec.summary       = 'a small CLI that lints your code and'\
                        ' run your tests before you push'
-  spec.homepage      = 'https://github.com/williampollet/safe_pusher'
+  spec.homepage      = 'https://github.com/williampollet/safepush'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org.
@@ -46,7 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pronto-simplecov', '~> 0.1.1'
   spec.add_development_dependency 'pry', '~> 0.12'
   spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rspec', '~> 3.12'
   spec.add_development_dependency 'rubocop', '~> 0.60'
   spec.add_development_dependency 'simplecov', '~> 0.16.1'
 end

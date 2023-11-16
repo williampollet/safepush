@@ -67,7 +67,7 @@ Metrics/BlockLength:
     - lib/tasks/**/*
     - app/admin/**/*
     - config/routes.rb
-    - safe_pusher.gemspec
+    - Safepush.gemspec
   ExcludedMethods:
     - included
 

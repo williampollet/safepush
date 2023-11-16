@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-RSpec.describe SafePusher::CLI do
+RSpec.describe Safepush::CLI do
   describe '#start' do
     subject(:start) { cli.start }
 
     let(:cli) { described_class.new(arguments: command) }
-    let(:tester) { SafePusher::Client::Rspec.new }
-    let(:linter) { SafePusher::Client::Pronto.new }
-    let(:pusher) { SafePusher::Client::Github.new }
-    let(:opener) { SafePusher::Client::Github.new }
-    let(:versioner) { SafePusher::Client::Git.new }
+    let(:tester) { Safepush::Client::Rspec.new }
+    let(:linter) { Safepush::Client::Pronto.new }
+    let(:pusher) { Safepush::Client::Github.new }
+    let(:opener) { Safepush::Client::Github.new }
+    let(:versioner) { Safepush::Client::Git.new }
 
     context 'when command is test' do
       let(:command) { ['test'] }
 
       before do
-        allow(SafePusher::Client::Rspec).to receive(:new).and_return(tester)
+        allow(Safepush::Client::Rspec).to receive(:new).and_return(tester)
         allow(tester).to receive(:test).and_return(0)
         allow($stdout).to receive(:puts)
       end
@@ -37,7 +37,7 @@ RSpec.describe SafePusher::CLI do
       let(:command) { ['lint'] }
 
       before do
-        allow(SafePusher::Client::Pronto).to receive(:new).and_return(linter)
+        allow(Safepush::Client::Pronto).to receive(:new).and_return(linter)
         allow(linter).to receive(:lint).and_return(0)
         allow($stdout).to receive(:puts)
       end
@@ -57,7 +57,7 @@ RSpec.describe SafePusher::CLI do
 
     context 'with a git command' do
       before do
-        allow(SafePusher::Client::Git).to receive(:new).and_return(versioner)
+        allow(Safepush::Client::Git).to receive(:new).and_return(versioner)
         allow($stdout).to receive(:puts)
       end
 
@@ -126,7 +126,7 @@ RSpec.describe SafePusher::CLI do
       let(:command) { ['push'] }
 
       before do
-        allow(SafePusher::Client::Github).to receive(:new).and_return(pusher)
+        allow(Safepush::Client::Github).to receive(:new).and_return(pusher)
         allow(pusher).to receive(:push).and_return(0)
         allow($stdout).to receive(:puts)
       end
@@ -148,7 +148,7 @@ RSpec.describe SafePusher::CLI do
       let(:command) { ['open'] }
 
       before do
-        allow(SafePusher::Client::Github).to receive(:new).and_return(opener)
+        allow(Safepush::Client::Github).to receive(:new).and_return(opener)
         allow(opener).to receive(:open).and_return(0)
         allow($stdout).to receive(:puts)
       end
@@ -170,8 +170,8 @@ RSpec.describe SafePusher::CLI do
       let(:command) { %w[test push] }
 
       before do
-        allow(SafePusher::Client::Rspec).to receive(:new).and_return(tester)
-        allow(SafePusher::Client::Github).to receive(:new).and_return(pusher)
+        allow(Safepush::Client::Rspec).to receive(:new).and_return(tester)
+        allow(Safepush::Client::Github).to receive(:new).and_return(pusher)
         allow(pusher).to receive(:push).and_return(0)
         allow(tester).to receive(:test).and_return(0)
         allow($stdout).to receive(:puts)
@@ -229,9 +229,9 @@ RSpec.describe SafePusher::CLI do
         let(:command) { %w[t p] }
 
         before do
-          allow(SafePusher::Client::Rspec)
+          allow(Safepush::Client::Rspec)
             .to receive(:new).and_return(tester)
-          allow(SafePusher::Client::Github).to receive(:new).and_return(pusher)
+          allow(Safepush::Client::Github).to receive(:new).and_return(pusher)
           allow(pusher).to receive(:push).and_return(0)
           allow(tester).to receive(:test).and_return(0)
           allow($stdout).to receive(:puts)
@@ -267,7 +267,7 @@ RSpec.describe SafePusher::CLI do
       it 'outputs the current version' do
         start
 
-        expect($stdout).to have_received(:puts).with(SafePusher::VERSION)
+        expect($stdout).to have_received(:puts).with(Safepush::VERSION)
       end
     end
   end
